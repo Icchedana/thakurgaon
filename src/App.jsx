@@ -8,6 +8,7 @@ import {
   Train, Compass, PlusCircle, Send, X, CloudSun, MessageCircle,
   Bell, ChevronRight, Stethoscope
 } from 'lucide-react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Apnar asol chobi (SVG SarmanProfileSVG) - 100% secure o fixed[cite: 2]
 const SARMAN_PHOTO_DATA = [
@@ -37,7 +38,7 @@ function SarmanProfileSVG() {
 const DEFAULT_SERVICES = [
   {
     id: 's1',
-    title_bn: 'ঠাকুরগাঁও ২৫০ শয্যা জেনারেল হাসপাতাল',
+    title_bn: 'ঠাকুরগাঁও ২৫০ শ���্যা জেনারেল হাসপাতাল',
     primary_phone: '01712213560',
     address_bn: 'হাসপাতাল রোড, ঠাকুরগাঁও সদর',
     description_bn: '২৪ ঘণ্টা জরুরি বিভাগ, ইনডোর-আউটডোর ও বিশেষজ্ঞ চিকিৎসা সেবা।',
@@ -234,7 +235,7 @@ export default function App() {
   const touristSpots = [
     { 
       name: 'ঐতিহাসিক হরিপুর রাজবাড়ি (ঘনশ্যাম রাজবাড়ি)', 
-      place: 'হরিপুর উপজেলা সদর, ঠাকুরগাঁও', 
+      place: 'হরিপুর উপজ���লা সদর, ঠাকুরগাঁও', 
       desc: 'জমিদার ঘনশ্যাম রায়ের আমলে প্রতিষ্ঠিত এবং পরবর্তীতে ঊনবিংশ শতাব্দীর শেষভাগে তাঁর বংশধরদের দ্বারা নির্মিত দ্বিতল সুরম্য রাজপ্রাসাদ। নান্দনিক খিলান ও প্রাচীন ঠাকুরদালান সংবলিত প্রত্নতাত্ত্বিক নিদর্শন।' 
     },
     { 
@@ -746,7 +747,7 @@ export default function App() {
                       : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                   }`}
                 >
-                  {grp === 'All' ? 'সকল গ্রুপ' : grp}
+                  {grp === 'All' ? 'স��ল গ্রুপ' : grp}
                 </button>
               ))}
             </div>
@@ -1014,6 +1015,7 @@ export default function App() {
           </button>
         </div>
       </nav>
+      <SpeedInsights />
     </div>
   );
 }
