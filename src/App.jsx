@@ -9,7 +9,7 @@ import {
   Bell, ChevronRight, Stethoscope
 } from 'lucide-react';
 
-// Apnar asol chobi (SVG SarmanProfileSVG) - 100% secure o fixed
+// Apnar asol chobi (SVG SarmanProfileSVG) - 100% secure o fixed[cite: 2]
 const SARMAN_PHOTO_DATA = [
   "data:image/webp;base64,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"
 ].join('');
@@ -33,7 +33,7 @@ function SarmanProfileSVG() {
   );
 }
 
-// Thakurgaon local backup services
+// Thakurgaon local backup services[cite: 2]
 const DEFAULT_SERVICES = [
   {
     id: 's1',
@@ -291,7 +291,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-800 pb-28 antialiased selection:bg-emerald-500 selection:text-white font-sans relative">
+    <div className="min-h-screen bg-slate-900 text-slate-800 pb-32 antialiased selection:bg-emerald-500 selection:text-white font-sans relative">
       
       {/* Background layer */}
       <div 
@@ -315,7 +315,7 @@ export default function App() {
 
       {/* Header banner */}
       <header className="relative z-10 text-white pt-6 pb-14 px-4 shadow-2xl overflow-hidden border-b border-white/10">
-        <div className="max-w-md mx-auto relative z-10">
+        <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto relative z-10">
           
           <div className="flex justify-between items-center mb-4">
             <div>
@@ -344,8 +344,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* 2x2 Shortcut Grid */}
-          <div className="grid grid-cols-2 gap-2.5 mb-4">
+          {/* Shortcut Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-4">
             <button 
               onClick={() => setActiveTab('tourism')}
               className={`p-2.5 rounded-2xl border flex items-center justify-between text-left transition active:scale-95 shadow-md ${activeTab === 'tourism' ? 'bg-amber-500 text-slate-950 border-amber-300 font-extrabold ring-2 ring-amber-300' : 'bg-slate-800/90 text-white border-slate-700/80 hover:bg-slate-700/90'}`}
@@ -412,7 +412,7 @@ export default function App() {
           </div>
 
           {activeTab === 'home' && (
-            <div className="space-y-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
               <div>
                 <select
                   value={selectedUpazila}
@@ -444,7 +444,7 @@ export default function App() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-md mx-auto px-4 -mt-6 relative z-20">
+      <main className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 -mt-6 relative z-20">
         
         {activeTab === 'home' && (
           <>
@@ -515,7 +515,7 @@ export default function App() {
                   </button>
                 )}
               </div>
-              <div className="grid grid-cols-4 gap-2 text-center">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
                 {categoryList.map((cat) => {
                   const IconComp = cat.icon;
                   const isSelected = selectedCategory === cat.name;
@@ -559,86 +559,46 @@ export default function App() {
                   <p className="font-bold">এই মুহূর্তে কোনো তথ্য খুঁজে পাওয়া যায়নি।</p>
                 </div>
               ) : (
-                filteredServices.map((service) => (
-                  <div 
-                    key={service.id} 
-                    className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition"
-                  >
-                    <div className="flex justify-between items-start mb-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {filteredServices.map((service) => (
+                    <div 
+                      key={service.id} 
+                      className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition flex flex-col justify-between"
+                    >
                       <div>
-                        <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-1.5">
-                          {service.title_bn}
-                          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                        </h3>
-                        <p className="text-xs text-slate-600 font-semibold flex items-center gap-1 mt-0.5">
-                          <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                          {service.address_bn} ({service.upazila_name})
-                        </p>
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-1.5">
+                              {service.title_bn}
+                              <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                            </h3>
+                            <p className="text-xs text-slate-600 font-semibold flex items-center gap-1 mt-0.5">
+                              <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                              {service.address_bn} ({service.upazila_name})
+                            </p>
+                          </div>
+                        </div>
+
+                        {service.description_bn && (
+                          <p className="text-xs text-slate-800 font-medium mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                            {service.description_bn}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="flex gap-2 mt-2">
+                        <a
+                          href={`tel:${service.primary_phone}`}
+                          className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition"
+                        >
+                          <Phone className="w-3.5 h-3.5" />
+                          কল করুন ({service.primary_phone})
+                        </a>
                       </div>
                     </div>
-
-                    {service.description_bn && (
-                      <p className="text-xs text-slate-800 font-medium mb-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                        {service.description_bn}
-                      </p>
-                    )}
-
-                    <div className="flex gap-2 mt-2">
-                      <a
-                        href={`tel:${service.primary_phone}`}
-                        className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition"
-                      >
-                        <Phone className="w-3.5 h-3.5" />
-                        কল করুন ({service.primary_phone})
-                      </a>
-                    </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
-            </section>
-
-            {/* 👨‍💻 Developer Profile Card with exact user photo */}
-            <section className="mt-8 bg-gradient-to-br from-slate-900 via-slate-850 to-slate-800 text-white rounded-2xl p-5 shadow-2xl relative overflow-hidden border border-slate-700">
-              <div className="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
-              
-              <div className="flex items-center gap-3.5 mb-3.5">
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-emerald-400 shadow-lg bg-slate-800 flex items-center justify-center">
-                    <SarmanProfileSVG />
-                  </div>
-                  <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
-                </div>
-                <div>
-                  <h4 className="font-bold text-base text-slate-100 leading-tight">Md. Sarman Rana</h4>
-                  <p className="text-xs text-emerald-400 font-medium mt-0.5">UI/UX Designer & Web Developer</p>
-                </div>
-              </div>
-
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                ঠাকুরগাঁও জেলার সাধারণ মানুষের সুবিধার্থে আধুনিক ওয়েব প্রযুক্তির সমন্বয়ে এই প্ল্যাটফর্মটি ডেভেলপ করা হয়েছে।
-              </p>
-
-              <div className="flex items-center justify-between pt-3 border-t border-slate-700">
-                <a 
-                  href="https://www.facebook.com/ak.sarman.ak" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white transition font-medium"
-                >
-                  <Share2 className="w-3.5 h-3.5 text-blue-400" />
-                  <span>ফেসবুক প্রোফাইল</span>
-                </a>
-
-                <a 
-                  href="http://iccheghurirdana.blogspot.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-emerald-300 hover:text-emerald-200 font-bold transition"
-                >
-                  <span>পোর্টফোলিও ভিজিট</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </section>
           </>
         )}
@@ -647,28 +607,32 @@ export default function App() {
         {activeTab === 'tourism' && (
           <section className="space-y-3">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-amber-300">
-              <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+              <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
                 <Compass className="w-5 h-5 text-amber-600" /> ঠাকুরগাঁওয়ের ঐতিহ্য ও দর্শনীয় স্থান
               </h3>
               <p className="text-xs text-slate-600 mt-0.5">ইতিহাস, সংস্কৃতি ও প্রাচীন নিদর্শনে সমৃদ্ধ অঞ্চল।</p>
             </div>
 
-            {touristSpots.map((spot, idx) => (
-              <div key={idx} className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200">
-                <div className="flex justify-between items-start">
-                  <h4 className="font-extrabold text-slate-900 text-sm sm:text-base">{spot.name}</h4>
-                  <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full shrink-0">
-                    ঐতিহাসিক স্থান
-                  </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {touristSpots.map((spot, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start">
+                      <h4 className="font-extrabold text-slate-900 text-sm sm:text-base">{spot.name}</h4>
+                      <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full shrink-0">
+                        ঐতিহাসিক স্থান
+                      </span>
+                    </div>
+                    <p className="text-xs text-emerald-700 font-bold flex items-center gap-1 mt-1 mb-2">
+                      <MapPin className="w-3.5 h-3.5 text-emerald-600" /> {spot.place}
+                    </p>
+                    <p className="text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-xl border border-slate-100 font-medium">
+                      {spot.desc}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-xs text-emerald-700 font-bold flex items-center gap-1 mt-1 mb-2">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600" /> {spot.place}
-                </p>
-                <p className="text-xs text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-xl border border-slate-100 font-medium">
-                  {spot.desc}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </section>
         )}
 
@@ -676,30 +640,32 @@ export default function App() {
         {activeTab === 'transport' && (
           <section className="space-y-4">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-sky-300">
-              <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2 mb-2">
+              <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2 mb-2">
                 <Train className="w-5 h-5 text-sky-600" /> আন্তঃনগর ট্রেনের সময়সূচী
               </h3>
-              <div className="space-y-2.5 mt-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 mt-3">
                 {trains.map((train, idx) => (
-                  <div key={idx} className="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <div className="flex justify-between items-start">
-                      <h4 className="font-bold text-slate-800 text-xs sm:text-sm">{train.name}</h4>
-                      <span className="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">
-                        ছুটি: {train.offDay}
-                      </span>
+                  <div key={idx} className="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start">
+                        <h4 className="font-bold text-slate-800 text-xs sm:text-sm">{train.name}</h4>
+                        <span className="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">
+                          ছুটি: {train.offDay}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-600 font-medium mt-1">{train.route}</p>
                     </div>
-                    <p className="text-xs text-slate-600 font-medium mt-1">{train.route}</p>
-                    <p className="text-[11px] text-sky-800 font-bold mt-0.5">{train.time}</p>
+                    <p className="text-[11px] text-sky-800 font-bold mt-2">{train.time}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-slate-200">
-              <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2 mb-3">
+              <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2 mb-3">
                 <Bus className="w-5 h-5 text-emerald-600" /> দূরপাল্লার বাস কাউন্টার
               </h3>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 {busCounters.map((bus, idx) => (
                   <div key={idx} className="bg-slate-50 p-3 rounded-xl border border-slate-200 flex justify-between items-center">
                     <div>
@@ -708,7 +674,7 @@ export default function App() {
                     </div>
                     <a
                       href={`tel:${bus.phone}`}
-                      className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm"
+                      className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm shrink-0"
                     >
                       <Phone className="w-3.5 h-3.5" /> কল
                     </a>
@@ -723,17 +689,19 @@ export default function App() {
         {activeTab === 'agri' && (
           <section className="space-y-4">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-emerald-400">
-              <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2 mb-1">
+              <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2 mb-1">
                 <Sprout className="w-5 h-5 text-emerald-600" /> ঠাকুরগাঁও কৃষি ও ফসল গাইড
               </h3>
               <p className="text-xs text-slate-600 mb-3">মৌসুমভিত্তিক প্রধান ফসল ও রোগবালাই প্রতিরোধে জরুরি পরামর্শ।</p>
               
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {agriGuides.map((agri, idx) => (
-                  <div key={idx} className="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-                    <h4 className="font-bold text-emerald-900 text-xs sm:text-sm">{agri.crop}</h4>
-                    <p className="text-[11px] text-red-700 font-bold mt-0.5">⚠️ সমস্যা: {agri.problem}</p>
-                    <p className="text-xs text-slate-800 mt-1 font-semibold bg-white p-2 rounded-lg border border-emerald-100">
+                  <div key={idx} className="bg-emerald-50 p-3 rounded-xl border border-emerald-200 flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-bold text-emerald-900 text-xs sm:text-sm">{agri.crop}</h4>
+                      <p className="text-[11px] text-red-700 font-bold mt-0.5">⚠️ সমস্যা: {agri.problem}</p>
+                    </div>
+                    <p className="text-xs text-slate-800 mt-2 font-semibold bg-white p-2 rounded-lg border border-emerald-100">
                       💡 পরামর্শ: {agri.solution}
                     </p>
                   </div>
@@ -783,11 +751,11 @@ export default function App() {
               ))}
             </div>
 
-            <div className="space-y-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {filteredDonors.map((donor, idx) => (
                 <div key={idx} className="bg-white p-3.5 rounded-2xl shadow-xl border border-slate-200 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 font-black text-xs flex items-center justify-center shadow-inner">
+                    <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 font-black text-xs flex items-center justify-center shadow-inner shrink-0">
                       {donor.group}
                     </div>
                     <div>
@@ -800,7 +768,7 @@ export default function App() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-1.5">
+                  <div className="flex gap-1.5 shrink-0">
                     <a
                       href={`https://wa.me/88${donor.phone}`}
                       target="_blank"
@@ -834,7 +802,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="space-y-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {ambulances.map((item, idx) => (
                 <div key={idx} className="bg-white p-3.5 rounded-2xl shadow-xl border border-slate-200 flex items-center justify-between">
                   <div>
@@ -845,7 +813,7 @@ export default function App() {
                   </div>
                   <a
                     href={`tel:${item.phone}`}
-                    className="bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md"
+                    className="bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md shrink-0"
                   >
                     <PhoneCall className="w-3.5 h-3.5" /> কল
                   </a>
@@ -865,23 +833,71 @@ export default function App() {
               </p>
             </div>
 
-            {emergencyHotlines.map((hotline, idx) => (
-              <div key={idx} className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 flex items-center justify-between">
-                <div>
-                  <h4 className="font-extrabold text-slate-900 text-sm">{hotline.title}</h4>
-                  <p className="text-xs text-slate-600 font-semibold mt-0.5">{hotline.desc}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {emergencyHotlines.map((hotline, idx) => (
+                <div key={idx} className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 flex items-center justify-between">
+                  <div>
+                    <h4 className="font-extrabold text-slate-900 text-sm">{hotline.title}</h4>
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">{hotline.desc}</p>
+                  </div>
+                  <a
+                    href={`tel:${hotline.phone}`}
+                    className="bg-red-500 hover:bg-red-600 text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition shrink-0"
+                  >
+                    <PhoneCall className="w-3.5 h-3.5" />
+                    {hotline.phone}
+                  </a>
                 </div>
-                <a
-                  href={`tel:${hotline.phone}`}
-                  className="bg-red-500 hover:bg-red-600 text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition"
-                >
-                  <PhoneCall className="w-3.5 h-3.5" />
-                  {hotline.phone}
-                </a>
-              </div>
-            ))}
+              ))}
+            </div>
           </section>
         )}
+
+        {/* 👨‍💻 Developer Identity Footer Section (Moved to Bottom Footer) */}
+        <footer className="mt-12 bg-gradient-to-br from-slate-900 via-slate-850 to-slate-800 text-white rounded-3xl p-6 shadow-2xl relative overflow-hidden border border-slate-700">
+          <div className="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
+          
+          <div className="max-w-xl mx-auto">
+            <div className="flex items-center gap-3.5 mb-3.5">
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-emerald-400 shadow-lg bg-slate-800 flex items-center justify-center">
+                  <SarmanProfileSVG />
+                </div>
+                <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+              </div>
+              <div>
+                <h4 className="font-bold text-base text-slate-100 leading-tight">Md. Sarman Rana</h4>
+                <p className="text-xs text-emerald-400 font-medium mt-0.5">UI/UX Designer & Web Developer</p>
+              </div>
+            </div>
+
+            <p className="text-xs text-slate-300 leading-relaxed mb-4">
+              ঠাকুরগাঁও জেলার সাধারণ মানুষের সুবিধার্থে আধুনিক ওয়েব প্রযুক্তির সমন্বয়ে এই প্ল্যাটফর্মটি ডেভেলপ করা হয়েছে। সর্বস্বত্ব সংরক্ষিত © ২০২৬ স্মার্ট ঠাকুরগাঁও।
+            </p>
+
+            <div className="flex items-center justify-between pt-3 border-t border-slate-700 text-xs">
+              <a 
+                href="https://www.facebook.com/ak.sarman.ak" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition font-medium"
+              >
+                <Share2 className="w-3.5 h-3.5 text-blue-400" />
+                <span>ফেসবুক প্রোফাইল</span>
+              </a>
+
+              <a 
+                href="http://iccheghurirdana.blogspot.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-bold transition"
+              >
+                <span>পোর্টফোলিও ভিজিট</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </footer>
       </main>
 
       {/* Add Service Modal */}
@@ -964,7 +980,7 @@ export default function App() {
 
       {/* Mobile Bottom Navigation Bar */}
       <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-white/10 py-2.5 px-4 z-40 shadow-2xl">
-        <div className="max-w-md mx-auto flex justify-around items-center">
+        <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto flex justify-around items-center">
           <button 
             onClick={() => setActiveTab('home')}
             className={`flex flex-col items-center gap-1 transition ${activeTab === 'home' ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}
