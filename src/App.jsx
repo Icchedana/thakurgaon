@@ -6,10 +6,9 @@ import {
   Sun, Award, Sprout, Store, ArrowUpRight, Share2, 
   Droplet, Siren, UserCheck, Check, Zap, Building2,
   Train, Compass, PlusCircle, Send, X, CloudSun, MessageCircle,
-  Bell, ChevronRight, Stethoscope
+  Bell, ChevronRight, ShoppingBag, Eye, EyeOff, Trash2, LogIn, LogOut, KeyRound, Image as ImageIcon, ShieldCheck, User, UserCog, Cloud, Thermometer
 } from 'lucide-react';
 
-// Apnar asol chobi (SVG SarmanProfileSVG) - 100% secure o fixed[cite: 2]
 const SARMAN_PHOTO_DATA = [
   "data:image/webp;base64,UklGRuQLAABXRUJQVlA4INgLAABwMwCdASqMAIwAPlEijkSjoiGVuNYkOAUEsYBpyjbo8lF3X/Vb6weyFxt+vNn5rGnHb0hkL3iXy2eI36Pwj8pfwmVScP/L/yl+w88PCf5NZRvut46UaDKbWYjT/Kj9Zewf+Z58J14qK/75Jp2uzWI0DBEpzTmzAZdRE74ctDm3md03CoP68legv3FHB20c66qeIezb51yMry/y1NKaCb9jB2WdK9GJPywyQ00O5Wk7DXx+X/l2u0LlxRiI9j5Mj2+N4dd24hmLRSSC50iMr2Qu1nv1p598m4rE0ujJFWsAU32tgofDksbu1Ez8YCa88uvf0O03wsgIAGysXgohYWiwcM0r+pBnUUsuBjSCva5IL4YH3Wd752eXZ6WuqAZdyXjn+XjC6NUOYo4zXLVRoLr3IQ549lx5kDO8PKmDWdK4/Y7xqMG/MfrQ8z77ItlrP9pxsPT6hXD3tXbJGPAQY2fnjzAw2PVpuiHmWrP/B+1Pf9o731UU+4GPfyQerQRTeE6KtRrI1nwgv46idHcetajx4v+iiWsjfn4GJwvBn7Jx5sSfOcAA/v2xAttOBULs1rDC5xibTqtSndGB02MsLw5oF6oNgT1DNbKhLO4qZZ0t30HwO3/mtg6sWacMd5OhR9smFVr6ZnBnf7c/yWBUl/8dnO5dxu5V1esT4S2O8piI/9oL+mmqbndOm2gY0dJUn0PTsPKMYAJXZsYtxBFyg23UVf/ViBQHSV7IgiwwrM07y1aBGf2KSwNw8YdZBbb7Yjsl4OWBE7lmOegZUOkMEDsGY9D+g6YR5siZFUSxNJzv5E6eoCS3OZis78PR8aIPtU3wwW6qgpPB1e+tdI81CCXKwrPgiXZe0IABaKFApZyt0TGrLZeJLz2FL1ghgaJvcFUdX6K4qxuhBsvmriOCZET+re2kQlIsLyiC4yodKGGHE0axt/TQVVqivTyxCQLHyTdtbL9Q3D2p5720U4r/NMO7vyTorayEbplcCaUN5KZETvBqiYV52ZxVIKMUqz/syrE/zCrDEzNxNCfNdygnmggGpOkRr7zihHceJsXPT9kzanvHJ8mYkmVHNPp0hfL5MTS3IYpPsfACzIachkin56Q0NY0H7x1UncRsgs29A//WvJKQ1eI7Aq8EHX+xCwsC8/jp0MwroMV+X/FNbv+JWA6Q2cTtNuyW5XTn23FhXFlXaF7fNZ2yuKzldDsAaKk7hmBv6tUg9iXnEZF3rozm1SCGjMXzemUIWxPixZoN5gpTJIrGpnAhmWhwKO0pknmhCvYgQVJs0nTKQwm4mBK5GWYCnRit/czalfD17OY1tm/a6y9s2kK1AjMPhIaeMWMmXfWV4xcaxBUIx1M13STyZMSdd5VVt9qbx3Jueryaj7lWmzx3VNl9+2L+L1SgbOKjgotwyqwwNq/XEBcNr4nhmFmo8mgm4jASy5wN7LnuGFW2i3+NUAnaqvtrkTsfrmAzDyArpeEc9NBxk8gpHS6RuCakJy79CzXoAHJ3n0whzDEPlWzpnEUvOHZn0ldhFJ/i8kQRlVwcrDIZ6VWhii71qkc+z+Y4TIC1J0KSJJiPSKvE/SMkdEqPnB9A3yK/7FLXWlkxZn5XHFVYpDUUHQm7Z8oGy4c1r0i6da2MLjJicvyoEqlSnxrmOspWlrEljvVEz5c9flUWu8SKh4uhXBBezswf+mlFx3LSaYw3KPd2E88pyUB0CUNqEziYI63Ius2O8r6dVtU46/HuLC6EwPDTpn7ko30SZCm7G23FgY6RL+qmDw5T0yEkFF2O+SoSrAZapa2V7xetSfVrOrrOiIwSvi74za3X9P8InehrsSBdcUQa7NdlyiVWVPkX/8L82E92BZzgosIW17qwYURCbt36i7MX/nMZ02sUh0auRh3c+8zZmYA0MAVhGaIbYB3cOLCJaIbLCIFEAPxOXJSHj+THr9LORQLUnJh18PpVRDz8X7JBTgtJ+BT28HWZnd5oaPUhebd9dtHelkN8SzB5/0J82sf1T/MjLcGjky/kr/kmayNj7rU7k1gvcKbH84U0BYIQamYvHEOMDutT5Eysh0HFkHL/u/tsE++JdlLP3YNCFU76PEPdJ6sI2CD08we61CrVQNft3em4DZYxsxfAFKS2Bzid5xOC7hEBhQe0074V1u8HUygP3nCrPgLiuqyNKZCYJaV+FpctRq+urN6Fv044Glx2t8YKoA3Htn7xYK3g3S+tR88SmsxmZRuZQcsY+rsWkMPnp2vo1F61hy01WOLSbPCXbOU/m4zvx0ILh/ebq+Kw9GG7IHoDqpvw13edMYWlyoMUX267FQQI3+WFAymayKdfn0dxVCq841BZT6gKLrbboHbrOlN5UvruuX/J5lFo6pvht9JmtFF3tv80Z/a2ffShnmdrYMNkWF6lwczf8i4Sw8wBLM/8SBj8gW7ABZ2JkHH84wU3Cf0sdOS2P85RyfhL+Cjei0IcB10E7RV8jCDJtk368H504ArxgTu7QXdg6r6PTfASU7T20Ztv1fRsQd+RPWAyZNzTNLwm4bpaaOcWlhSpBmB6QKYL+c6GuByna+VRtKFqQcsUDnymgbs6Xc63puqFzAahOf76mVY+zw7xjDV5k5ySHLq591n2fPm2yw0r27bxGHfnkFQrkT/ZhlWR8xSx3vc2VLspHPEvKg/Eh/QGSfhFQihO9qSQJeHJTmraQTK8QXxk/LegI1wYGu1puPXxBlmktM3DtzQggDWpSusu6VFZ/N+GZ+mLAZsQWbBf7/xnRwG+bCyUhhJX9URaLPtivyMJCtlOUB5Z3sd0Sqe8S0LAJpKBD897WgfIy723yvHN+lwh5bJN85sCiLF254iYdPfroD0fporEkWwwCuL9k2sazJ1bly/8uc+dWVZui3YzclundcTVWMBmDHFIZT6+CJCJkCS7Yt29q56Zjsi8WrC7d58NPut6e3A+GG8tdib5pn0M/J7GHgjYU31OHDbcsN1sjFmSA3KgJMHKnZ9uQoKYnbDAQBOVfoMnuMlhJK3xw3p80eQH6wSGchQnW/v2+HAjaqf+ni4BorbZ24pYbD3Z3GD2tfRyaYtbvdbTmrT7hGZ6pqzC3K8qBDnisrtCxubwmLvjG3Ybqsxl9+I/Z3g8mQHkfYWrLcxRRAQTdDROwVpVoui4aX0H3NDV+iIWR+lCN09MoT/VcfzSaSTXe8/2IvWDzxSE2igpRat6PnpgmlVQkxmjQDhhHAUe+K7f/UZanFopH4DgTQDBjM8B7UkRsLB2clc9nSiDKmYe1y6vfJCBmeSaqZMhNIS7cwUq1stzHoyZyOKwXpUEb/CxEtVr1y3V/o6ARhp8AdCipzQngRPqxYFZwKpD6HAQv4aickzIlb7ZOFrY6SbLH7q5gsDnQum4tsk7lN9arFVe5maCakjoMYgHzC6Z47YpFPxF1NlCtijVfe+TGFCtv9hXdsG001r/KGAvJTEDfu0MnARiQxNECJjPBecBuFWtkxhGyarj9KzS8Yha0nf2pyt5NvlmnLPD9PKhmwzAosVrhKE6cKsE/FQK1ehUTfX/yvLtM65LifmHjL2n5c5TPaKTOsbQcEaU++SnmnPgNvziofKScH5PER7sA/2L7DpSz1Ben0kUiuqkHGHg7sjy0hiTkYJlf7jr3GPWTQyd127lcy/6goo4CU8vsYFGo/jVGZ33rBKwxSLScKYQMVkCJDJW0Pzj9JVJgxIO2zNz+pvZUjqKRxT3/jaYZGIvrwb1105EuUMIKWsZQhmmxOy6kdqpgtYCRV5UDEJRiRohGBPvT4kUtloGWI/h1Qx7B+FSa6SKHNNOvS5qnroEXHanyvbALzpArvZ5P+4E+M8RhYiWKEzGobSiS4yhHzyj8C5yK8zf31wr8k7WTSZUiDVmyCWyT+msarp6WUlXZZWsuxLRakX97NRqnoggJT9iGB8eomzYdG9M+3Bp1DIQoswooYuRFE78WxbxVrfOSz59x0hxUX+9fW7ij/O7shcDm3JRhaPFGoNIJhQM+/n16VCEHA7tkxjN0V/aJaFsrVAbajnYFrQf4kIAAA=="
 ].join('');
@@ -33,7 +32,6 @@ function SarmanProfileSVG() {
   );
 }
 
-// Thakurgaon local backup services[cite: 2]
 const DEFAULT_SERVICES = [
   {
     id: 's1',
@@ -100,9 +98,38 @@ const DEFAULT_SERVICES = [
   }
 ];
 
+const DEFAULT_TOURIST_SPOTS = [
+  { 
+    name: 'ঐতিহাসিক হরিপুর রাজবাড়ি (ঘনশ্যাম রাজবাড়ি)', 
+    place: 'হরিপুর উপজেলা সদর, ঠাকুরগাঁও', 
+    desc: 'জমিদার ঘনশ্যাম রায়ের আমলে প্রতিষ্ঠিত এবং পরবর্তীতে ঊনবিংশ শতাব্দীর শেষভাগে তাঁর বংশধরদের দ্বারা নির্মিত দ্বিতল সুরম্য রাজপ্রাসাদ।' 
+  },
+  { 
+    name: 'জামালপুর জমিদার বাড়ি জামে মসজিদ', 
+    place: 'শিবগঞ্জ, ঠাকুরগাঁও সদর', 
+    desc: 'মুঘল ও ইউরোপীয় স্থাপত্যরীতির অনন্য মেলবন্ধনে নির্মিত ঐতিহাসিক তিন গম্বুজবিশিষ্ট প্রাচীন মসজিদ।' 
+  },
+  { 
+    name: 'রাজা টংকনাথের রাজবাড়ি', 
+    place: 'রানীশংকৈল, ঠাকুরগাঁও', 
+    desc: 'বিংশ শতাব্দীর গোড়ার দিকে নির্মিত প্রাচীন মালদুয়ার জমিদারের সুবিশাল ঐতিহাসিক রাজপ্রাসাদ।' 
+  },
+  { 
+    name: 'লোকায়ন জীবনবৈচিত্র্য জাদুঘর', 
+    place: 'ঠাকুরগাঁও সদর', 
+    desc: 'উত্তরবঙ্গের গ্রামীণ জনজীবনের বিলুপ্তপ্রায় ঐতিহ্য, তৈজসপত্র ও লোকসংস্কৃতির সমৃদ্ধ সংগ্রহশালা।' 
+  },
+  { 
+    name: 'বালিয়া মসজিদ ও রাজভিটা', 
+    place: 'ভূল্লী / বালিয়াডাঙ্গী', 
+    desc: 'নৈসর্গিক টেরাকোটা অলংকরণ ও ঐতিহ্যবাহী প্রত্নতাত্ত্বিক নিদর্শনের প্রতীক।' 
+  }
+];
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('home'); 
   const [services, setServices] = useState([]);
+  const [touristSpots, setTouristSpots] = useState(DEFAULT_TOURIST_SPOTS);
   const [selectedUpazila, setSelectedUpazila] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('All');
@@ -112,6 +139,41 @@ export default function App() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [newService, setNewService] = useState({ title: '', phone: '', address: '', upazila: 'হরিপুর', category: 'জরুরি সেবা' });
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // Weather State (Live API)
+  const [weatherData, setWeatherData] = useState({ temp: '২৮', condition: 'অনুকূল, আলু ও ভুট্টার সেচ উপযোগী' });
+
+  // Authentication & Admin State
+  const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState('login'); 
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authConfirmPassword, setAuthConfirmPassword] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
+
+  // User Profile State
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [profileData, setProfileData] = useState({ full_name: '', phone: '', address: '', avatar_url: '' });
+  const [profileAvatarFile, setProfileAvatarFile] = useState(null);
+
+  // Market & Rent Listings State
+  const [listings, setListings] = useState([]);
+  const [marketFilter, setMarketFilter] = useState('All'); 
+  const [showListingModal, setShowListingModal] = useState(false);
+  const [newListing, setNewListing] = useState({
+    title: '',
+    listing_type: 'বিক্রয়',
+    price: '',
+    phone: '',
+    upazila: 'হরিপুর',
+    address: '',
+    description: '',
+    trx_id: ''
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const upazilaList = ['ঠাকুরগাঁও সদর', 'হরিপুর', 'রানীশংকৈল', 'পীরগঞ্জ', 'বালিয়াডাঙ্গী'];
 
@@ -124,7 +186,88 @@ export default function App() {
 
   useEffect(() => {
     fetchServices();
+    fetchListings();
+    fetchTouristSpots();
+    fetchLiveWeather();
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) fetchUserProfile(session.user.id);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) fetchUserProfile(session.user.id);
+      else setIsAdmin(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, [selectedUpazila, selectedCategory]);
+
+  // Live Weather Fetcher for Thakurgaon
+  const fetchLiveWeather = async () => {
+    try {
+      const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=26.0336&longitude=88.4616&current=temperature_2m,weather_code');
+      const data = await response.json();
+      if (data && data.current) {
+        const tempVal = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+        let condText = 'আবহাওয়া অনুকূল';
+        if (code >= 1 && code <= 3) condText = 'আংশিক মেঘলা';
+        else if (code >= 51 && code <= 67) condText = 'বৃষ্টিপাত হতে পারে';
+        else if (code >= 71) condText = 'ঠান্ডা ও কুয়াশাচ্ছন্ন';
+
+        setWeatherData({
+          temp: tempVal.toString(),
+          condition: `${condText}, কৃষি কাজের জন্য উপযোগী`
+        });
+      }
+    } catch (err) {
+      console.error("Live weather fetch error:", err);
+    }
+  };
+
+  const fetchTouristSpots = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('tourism')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (data && data.length > 0) {
+        setTouristSpots(data.map(item => ({
+          name: item.name,
+          place: item.place,
+          desc: item.description
+        })));
+      }
+    } catch (err) {
+      console.error("Tourism fetch error:", err);
+    }
+  };
+
+  const fetchUserProfile = async (userId) => {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+    
+    if (data) {
+      setProfileData({
+        full_name: data.full_name || '',
+        phone: data.phone || '',
+        address: data.address || '',
+        avatar_url: data.avatar_url || ''
+      });
+
+      if (data.role === 'admin') {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    }
+  };
 
   const fetchServices = async () => {
     setLoading(true);
@@ -164,6 +307,207 @@ export default function App() {
     }
   };
 
+  const fetchListings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('listings')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (!error && data) {
+        setListings(data);
+      }
+    } catch (err) {
+      console.error("Listings fetch error:", err);
+    }
+  };
+
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    setAuthMessage('');
+
+    if (authMode === 'signup') {
+      if (authPassword !== authConfirmPassword) {
+        setAuthMessage('পাসওয়ার্ড দুটি মিলছে না!');
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email: authEmail,
+        password: authPassword,
+      });
+      if (error) {
+        setAuthMessage(error.message);
+      } else {
+        setAuthMessage('রেজিস্ট্রেশন সফল হয়েছে! এখন লগইন করুন।');
+        setAuthMode('login');
+      }
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: authEmail,
+        password: authPassword,
+      });
+      if (error) {
+        setAuthMessage(error.message);
+      } else {
+        setShowAuthModal(false);
+        setAuthEmail('');
+        setAuthPassword('');
+        setAuthConfirmPassword('');
+      }
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setIsAdmin(false);
+  };
+
+  const handleProfileUpdate = async (e) => {
+    e.preventDefault();
+    if (!user) return;
+
+    setUploading(true);
+    try {
+      let avatarUrl = profileData.avatar_url;
+
+      if (profileAvatarFile) {
+        const fileExt = profileAvatarFile.name.split('.').pop();
+        const fileName = `avatar_${user.id}_${Math.random()}.${fileExt}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('listings-images')
+          .upload(fileName, profileAvatarFile);
+
+        if (!uploadError) {
+          const { data: publicUrlData } = supabase.storage
+            .from('listings-images')
+            .getPublicUrl(fileName);
+          avatarUrl = publicUrlData.publicUrl;
+        }
+      }
+
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          full_name: profileData.full_name,
+          phone: profileData.phone,
+          address: profileData.address,
+          avatar_url: avatarUrl
+        })
+        .eq('id', user.id);
+
+      if (!error) {
+        setProfileData(prev => ({ ...prev, avatar_url: avatarUrl }));
+        setShowProfileModal(false);
+        alert('প্রোফাইল সফলভাবে আপডেট হয়েছে!');
+      } else {
+        alert('ত্রুটি: ' + error.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleListingSubmit = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    setUploading(true);
+    try {
+      let imageUrl = null;
+
+      if (imageFile) {
+        const fileExt = imageFile.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('listings-images')
+          .upload(filePath, imageFile);
+
+        if (uploadError) {
+          alert('ফাইল আপলোডে সমস্যা হয়েছে: ' + uploadError.message);
+          setUploading(false);
+          return;
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('listings-images')
+          .getPublicUrl(filePath);
+
+        imageUrl = publicUrlData.publicUrl;
+      }
+
+      const { error } = await supabase.from('listings').insert([
+        {
+          ...newListing,
+          image_url: imageUrl,
+          user_id: user.id,
+          user_email: user.email,
+          is_hidden: false,
+          is_approved: isAdmin ? true : false
+        }
+      ]);
+
+      if (!error) {
+        setShowListingModal(false);
+        setNewListing({
+          title: '',
+          listing_type: 'বিক্রয়',
+          price: '',
+          phone: '',
+          upazila: 'হরিপুর',
+          address: '',
+          description: '',
+          trx_id: ''
+        });
+        setImageFile(null);
+        fetchListings();
+        alert(isAdmin ? "বিজ্ঞাপন সফলভাবে পোস্ট ও লাইভ হয়েছে!" : "বিজ্ঞাপন সফলভাবে জমা হয়েছে! অ্যাডমিন যাচাই করার পর তা সাইটে শো করবে।");
+      } else {
+        alert("ত্রুটি: " + error.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const toggleHideListing = async (id, currentStatus) => {
+    const { error } = await supabase
+      .from('listings')
+      .update({ is_hidden: !currentStatus })
+      .eq('id', id);
+
+    if (!error) fetchListings();
+  };
+
+  const approveListing = async (id) => {
+    const { error } = await supabase
+      .from('listings')
+      .update({ is_approved: true })
+      .eq('id', id);
+
+    if (!error) {
+      fetchListings();
+      alert("বিজ্ঞাপনটি সফলভাবে এপ্রুভ করা হয়েছে!");
+    }
+  };
+
+  const deleteListing = async (id) => {
+    if (window.confirm("আপনি কি নিশ্চিতভাবে এই বিজ্ঞাপনটি ডিলিট করতে চান?")) {
+      const { error } = await supabase.from('listings').delete().eq('id', id);
+      if (!error) fetchListings();
+    }
+  };
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -198,25 +542,27 @@ export default function App() {
     service.upazila_name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const trains = [
-    { 
-      name: 'দ্রুতযান এক্সপ্রেস (৭৫৭/৭৫৮)', 
-      route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড ⇄ পঞ্চগড়', 
-      time: 'ঢাকা ছাড়ে: রাত ৮:০০ | ঠাকুরগাঁও পৌঁছায়: ভোর ৫:৫০', 
-      offDay: 'ঢাকা থেকে: নেই / পঞ্চগড় থেকে: বুধবার' 
-    },
-    { 
-      name: 'একতা এক্সপ্রেস (৭০৫/৭০৬)', 
-      route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড ⇄ পঞ্চগড়', 
-      time: 'ঢাকা ছাড়ে: সকাল ১০:১০ | ঠাকুরগাঁও পৌঁছায়: রাত ৮:১০', 
-      offDay: 'মঙ্গলবার' 
-    },
-    { 
-      name: 'পঞ্চগড় এক্সপ্রেস (৭৯৩/৭৯৪)', 
-      route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড (সেমি নন-স্টপ)', 
-      time: 'ঢাকা ছাড়ে: রাত ১১:৩০ | ঠাকুরগাঁও পৌঁছায়: সকাল ৮:৩০', 
-      offDay: 'সাপ্তাহিক ছুটি নেই (প্রতিদিন)' 
+  const filteredListings = listings.filter(item => {
+    const isOwner = user && user.id === item.user_id;
+
+    if (marketFilter === 'MyPosts') {
+      if (!user) return false;
+      return isOwner;
     }
+
+    if (!isAdmin && activeTab !== 'admin') {
+      if (!item.is_approved) return false;
+      if (item.is_hidden && !isOwner) return false;
+    }
+
+    if (marketFilter === 'All') return true;
+    return item.listing_type === marketFilter;
+  });
+
+  const trains = [
+    { name: 'দ্রুতযান এক্সপ্রেস (৭৫৭/৭৫৮)', route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড ⇄ পঞ্চগড়', time: 'ঢাকা ছাড়ে: রাত ৮:০০ | ঠাকুরগাঁও পৌঁছায়: ভোর ৫:৫০', offDay: 'ঢাকা থেকে: নেই / পঞ্চগড় থেকে: বুধবার' },
+    { name: 'একতা এক্সপ্রেস (৭০৫/৭০৬)', route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড ⇄ পঞ্চগড়', time: 'ঢাকা ছাড়ে: সকাল ১০:১০ | ঠাকুরগাঁও পৌঁছায়: রাত ৮:১০', offDay: 'মঙ্গলবার' },
+    { name: 'পঞ্চগড় এক্সপ্রেস (৭৯৩/৭৯৪)', route: 'ঢাকা ⇄ ঠাকুরগাঁও রোড (সেমি নন-স্টপ)', time: 'ঢাকা ছাড়ে: রাত ১১:৩০ | ঠাকুরগাঁও পৌঁছায়: সকাল ৮:৩০', offDay: 'সাপ্তাহিক ছুটি নেই (প্রতিদিন)' }
   ];
 
   const busCounters = [
@@ -229,34 +575,6 @@ export default function App() {
     { crop: 'আমন ও বোরো ধান', problem: 'মাজরা পোকা ও ব্লাস্ট রোগ', solution: 'জমিতে পরিমিত পটাশ সার প্রয়োগ করুন এবং আক্রমণের শুরুতে ট্রাইসাইক্লাজল বা কার্বেনডাজিম স্প্রে করুন।' },
     { crop: 'ভুট্টা চাষ', problem: 'ফল আর্মিওয়ার্ম ও পাতা পোড়া', solution: 'জমি সবসময় আগাছামুক্ত রাখুন এবং আক্রমণ দেখা দিলে স্পিনোস্যাড বা ক্লোরপায়রিফস প্রয়োগ করুন।' },
     { crop: 'আলু ফসল', problem: 'নাবি ধসা (Late Blight)', solution: 'আবহাওয়ায় কুয়াশা ও আর্দ্রতা বেশি থাকলে প্রতিরোধমূলকভাবে ম্যানকোজেব স্প্রে করতে হবে।' }
-  ];
-
-  const touristSpots = [
-    { 
-      name: 'ঐতিহাসিক হরিপুর রাজবাড়ি (ঘনশ্যাম রাজবাড়ি)', 
-      place: 'হরিপুর উপজেলা সদর, ঠাকুরগাঁও', 
-      desc: 'জমিদার ঘনশ্যাম রায়ের আমলে প্রতিষ্ঠিত এবং পরবর্তীতে ঊনবিংশ শতাব্দীর শেষভাগে তাঁর বংশধরদের দ্বারা নির্মিত দ্বিতল সুরম্য রাজপ্রাসাদ। নান্দনিক খিলান ও প্রাচীন ঠাকুরদালান সংবলিত প্রত্নতাত্ত্বিক নিদর্শন।' 
-    },
-    { 
-      name: 'জামালপুর জমিদার বাড়ি জামে মসজিদ', 
-      place: 'শিবগঞ্জ, ঠাকুরগাঁও সদর', 
-      desc: 'মুঘল ও ইউরোপীয় স্থাপত্যরীতির অনন্য মেলবন্ধনে নির্মিত ঐতিহাসিক তিন গম্বুজবিশিষ্ট প্রাচীন মসজিদ।' 
-    },
-    { 
-      name: 'রাজা টংকনাথের রাজবাড়ি', 
-      place: 'রানীশংকৈল, ঠাকুরগাঁও', 
-      desc: 'বিংশ শতাব্দীর গোড়ার দিকে নির্মিত প্রাচীন মালদুয়ার জমিদারের সুবিশাল ঐতিহাসিক রাজপ্রাসাদ।' 
-    },
-    { 
-      name: 'লোকায়ন জীবনবৈচিত্র্য জাদুঘর', 
-      place: 'ঠাকুরগাঁও সদর', 
-      desc: 'উত্তরবঙ্গের গ্রামীণ জনজীবনের বিলুপ্তপ্রায় ঐতিহ্য, তৈজসপত্র ও লোকসংস্কৃতির সমৃদ্ধ সংগ্রহশালা।' 
-    },
-    { 
-      name: 'বালিয়া মসজিদ ও রাজভিটা', 
-      place: 'ভূল্লী / বালিয়াডাঙ্গী', 
-      desc: 'নৈসর্গিক টেরাকোটা অলংকরণ ও ঐতিহ্যবাহী প্রত্নতাত্ত্বিক নিদর্শনের প্রতীক।' 
-    }
   ];
 
   const bloodDonors = [
@@ -293,7 +611,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-800 pb-32 antialiased selection:bg-emerald-500 selection:text-white font-sans relative">
       
-      {/* Background layer */}
       <div 
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-all duration-700 pointer-events-none"
         style={{
@@ -303,17 +620,15 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/85 via-slate-900/75 to-emerald-950/90 backdrop-blur-[1.5px]"></div>
       </div>
 
-      {/* Running notice bar */}
       <div className="relative z-20 bg-amber-400 text-slate-950 px-3 py-1.5 text-[11px] font-black flex items-center gap-2 shadow-md">
         <span className="bg-slate-950 text-amber-300 px-2 py-0.5 rounded text-[9px] uppercase tracking-wider shrink-0 flex items-center gap-1">
           <Bell className="w-3 h-3 animate-bounce" /> নোটিশ
         </span>
         <marquee className="font-bold">
-          স্মার্ট ঠাকুরগাঁওয়ে স্বাগতম! জেলার সকল জরুরি নম্বর, রক্তদাতা, হাসপাতাল ও দর্শনীয় স্থানের তথ্য এক ক্লিকেই পেয়ে যান।
+          স্মার্ট ঠাকুরগাঁওয়ে স্বাগতম! বিজ্ঞাপন পোস্টিং ফি (২০ টাকা) বিকাশ/নগদ নম্বর (01744857273)-এ পেমেন্ট সাপেক্ষে অ্যাডমিন অনুমোদন সাপেক্ষে লাইভ হবে।
         </marquee>
       </div>
 
-      {/* Header banner */}
       <header className="relative z-10 text-white pt-6 pb-14 px-4 shadow-2xl overflow-hidden border-b border-white/10">
         <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto relative z-10">
           
@@ -323,29 +638,79 @@ export default function App() {
                 <Sun className="w-3.5 h-3.5 text-amber-300" /> টাঙ্গনের তীরে • কৃষি ও ঐতিহ্যের জনপদ
               </div>
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight drop-shadow text-white">স্মার্ট ঠাকুরগাঁও</h1>
-              <p className="text-xs text-emerald-200 font-semibold mt-0.5">নাগরিক সেবা ও তথ্য বাতায়ন</p>
+              <p className="text-xs text-emerald-200 font-semibold mt-0.5">নাগরিক সেবা ও লোকাল মার্কেটপ্লেস</p>
             </div>
             
             <div className="flex items-center gap-2">
+              {user ? (
+                <div className="flex items-center gap-1.5 bg-white/15 px-3 py-1.5 rounded-2xl border border-white/20">
+                  {profileData.avatar_url ? (
+                    <img src={profileData.avatar_url} alt="Profile" className="w-6 h-6 rounded-full object-cover border border-emerald-300" />
+                  ) : (
+                    <User className="w-4 h-4 text-emerald-300" />
+                  )}
+                  <span className="text-[11px] text-emerald-300 font-bold truncate max-w-[80px] sm:max-w-[100px]">
+                    {profileData.full_name || user.email.split('@')[0]}
+                  </span>
+                  <button onClick={() => setShowProfileModal(true)} title="প্রোফাইল এডিট" className="text-amber-300 hover:text-amber-200 p-1">
+                    <UserCog className="w-4 h-4" />
+                  </button>
+                  <button onClick={handleLogout} title="লগআউট" className="text-red-400 hover:text-red-300 p-1">
+                    <LogOut className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+                  className="h-10 px-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow-lg"
+                >
+                  <LogIn className="w-4 h-4 text-emerald-300" /> লগইন
+                </button>
+              )}
+
+              {isAdmin && (
+                <button
+                  onClick={() => setActiveTab('admin')}
+                  className={`h-10 px-3 rounded-2xl text-xs font-black flex items-center gap-1 transition shadow-lg border ${
+                    activeTab === 'admin' ? 'bg-red-600 text-white border-red-400' : 'bg-slate-800 text-red-300 border-red-500/50'
+                  }`}
+                >
+                  <ShieldCheck className="w-4 h-4" /> অ্যাডমিন প্যানেল
+                </button>
+              )}
+
               <button
                 onClick={() => setShowAddModal(true)}
                 className="h-10 px-3 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-xs flex items-center gap-1.5 transition active:scale-95 shadow-xl border border-amber-300"
-                title="সেবা যুক্ত করুন"
               >
                 <PlusCircle className="w-4 h-4" /> সেবা যুক্ত করুন
               </button>
               <button
                 onClick={handleShare}
                 className="w-10 h-10 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/25 flex items-center justify-center transition active:scale-95 shadow-lg"
-                title="শেয়ার করুন"
               >
                 {copied ? <Check className="w-5 h-5 text-emerald-300" /> : <Share2 className="w-5 h-5 text-emerald-100" />}
               </button>
             </div>
           </div>
 
-          {/* Shortcut Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mb-4">
+            <button 
+              onClick={() => setActiveTab('market')}
+              className={`p-2.5 rounded-2xl border flex items-center justify-between text-left transition active:scale-95 shadow-md ${activeTab === 'market' ? 'bg-amber-500 text-slate-950 border-amber-300 font-extrabold ring-2 ring-amber-300' : 'bg-slate-800/90 text-white border-slate-700/80 hover:bg-slate-700/90'}`}
+            >
+              <div className="flex items-center gap-2">
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${activeTab === 'market' ? 'bg-slate-950 text-amber-400' : 'bg-amber-400/20 text-amber-300'}`}>
+                  <ShoppingBag className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold leading-tight">বাজার ও ভাড়া</h4>
+                  <p className={`text-[10px] ${activeTab === 'market' ? 'text-slate-800' : 'text-slate-400'}`}>কেনাবেচা / টু-লেট</p>
+                </div>
+              </div>
+              <ChevronRight className="w-4 h-4 opacity-70" />
+            </button>
+
             <button 
               onClick={() => setActiveTab('tourism')}
               className={`p-2.5 rounded-2xl border flex items-center justify-between text-left transition active:scale-95 shadow-md ${activeTab === 'tourism' ? 'bg-amber-500 text-slate-950 border-amber-300 font-extrabold ring-2 ring-amber-300' : 'bg-slate-800/90 text-white border-slate-700/80 hover:bg-slate-700/90'}`}
@@ -372,7 +737,7 @@ export default function App() {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold leading-tight">ট্রেন ও বাস</h4>
-                  <p className={`text-[10px] ${activeTab === 'transport' ? 'text-slate-800' : 'text-slate-400'}`}>সময়সূচী ও কাউন্টার</p>
+                  <p className={`text-[10px] ${activeTab === 'transport' ? 'text-slate-800' : 'text-slate-400'}`}>সময়সূচী ও কাউন্টার</p>
                 </div>
               </div>
               <ChevronRight className="w-4 h-4 opacity-70" />
@@ -443,23 +808,213 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Content Area */}
       <main className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto px-4 -mt-6 relative z-20">
         
+        {activeTab === 'admin' && (
+          <section className="space-y-4">
+            <div className="bg-red-900 text-white rounded-2xl p-4 shadow-xl border-2 border-red-400 flex items-center justify-between">
+              <div>
+                <h3 className="font-extrabold text-base flex items-center gap-2">
+                  <ShieldCheck className="w-6 h-6 text-amber-300" /> অ্যাডমিন এপ্রুভাল প্যানেল
+                </h3>
+                <p className="text-xs text-red-200 mt-0.5">যে সমস্ত বিজ্ঞাপন পেমেন্ট সহ পোস্ট হয়েছে কিন্তু এখনো এপ্রুভ হয়নি, তা এখানে যাচাই করে অনুমোদন দিন।</p>
+              </div>
+              <button onClick={() => setActiveTab('market')} className="bg-white text-slate-950 text-xs font-bold px-3 py-1.5 rounded-xl">
+                বাজার দেখুন
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {listings.filter(l => !l.is_approved).length === 0 ? (
+                <div className="col-span-full bg-white p-8 rounded-2xl text-center shadow-xl text-slate-700 text-xs font-bold">
+                  ✅ এই মুহূর্তে কোনো পেন্ডিং বিজ্ঞাপন নেই।
+                </div>
+              ) : (
+                listings.filter(l => !l.is_approved).map(item => (
+                  <div key={item.id} className="bg-white p-4 rounded-2xl shadow-xl border-2 border-amber-400 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-extrabold text-slate-900 text-base">{item.title}</h4>
+                        <span className="text-[10px] bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded-full">
+                          পেন্ডিং এপ্রুভাল
+                        </span>
+                      </div>
+                      <p className="text-xs font-bold text-slate-700 mb-1">মূল্য: {item.price} | ধরণ: {item.listing_type}</p>
+                      <p className="text-xs text-slate-600 mb-2">ইউজার ইমেইল: {item.user_email || 'N/A'}</p>
+                      <p className="text-xs font-extrabold text-purple-700 bg-purple-50 p-2 rounded-xl mb-2 border border-purple-200">
+                        💳 ট্রানজেকশন আইডি (TrxID): {item.trx_id || 'দেয়া হয়নি'}
+                      </p>
+                      <p className="text-xs text-slate-600 mb-3">ফোন: {item.phone} | ঠিকানা: {item.address} ({item.upazila})</p>
+                    </div>
+
+                    <div className="flex gap-2 pt-2 border-t border-slate-100">
+                      <button
+                        onClick={() => approveListing(item.id)}
+                        className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1 shadow"
+                      >
+                        <Check className="w-4 h-4" /> এপ্রুভ করুন (Live দিন)
+                      </button>
+                      <button
+                        onClick={() => deleteListing(item.id)}
+                        className="bg-red-100 text-red-700 hover:bg-red-200 text-xs font-bold px-3 py-2 rounded-xl"
+                      >
+                        বাতিল/ডিলিট
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'market' && (
+          <section className="space-y-4">
+            <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-amber-400 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div>
+                <h3 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                  <ShoppingBag className="w-5 h-5 text-amber-600" /> স্থানীয় কেনাবেচা ও ভাড়া (Buy/Sell & Rent)
+                </h3>
+                <p className="text-xs text-slate-600 mt-0.5">পোস্টিং ফি ২০ টাকা পেমেন্ট করে বিজ্ঞাপন দিন। অ্যাডমিন যাচাই করে লাইভ করবে।</p>
+              </div>
+              <button
+                onClick={() => {
+                  if (!user) { setAuthMode('login'); setShowAuthModal(true); }
+                  else setShowListingModal(true);
+                }}
+                className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-md transition active:scale-95 shrink-0"
+              >
+                <PlusCircle className="w-4 h-4" /> নতুন বিজ্ঞাপন দিন
+              </button>
+            </div>
+
+            <div className="flex gap-2 flex-wrap">
+              {['All', 'বিক্রয়', 'ভাড়া', 'MyPosts'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setMarketFilter(type)}
+                  className={`px-4 py-1.5 rounded-xl text-xs font-bold transition shadow-sm ${
+                    marketFilter === type ? 'bg-amber-500 text-slate-950 ring-2 ring-amber-300' : 'bg-white/90 text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  {type === 'All' ? 'সব বিজ্ঞাপন' : type === 'বিক্রয়' ? '🏷️ বিক্রয়' : type === 'ভাড়া' ? '🏠 ভাড়া (To-Let)' : '👤 আমার পোস্টসমূহ'}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {filteredListings.length === 0 ? (
+                <div className="col-span-full bg-white p-8 rounded-2xl text-center shadow-xl border border-slate-200 text-slate-600 text-xs font-bold">
+                  {marketFilter === 'MyPosts' ? 'আপনি এখনো কোনো বিজ্ঞাপন পোস্ট করেননি।' : 'কোনো অনুমোদিত বিজ্ঞাপন পাওয়া যায়নি।'}
+                </div>
+              ) : (
+                filteredListings.map((item) => {
+                  const isOwner = user && user.id === item.user_id;
+                  const isVideo = item.image_url && (item.image_url.endsWith('.mp4') || item.image_url.includes('video') || item.image_url.includes('.webm') || item.image_url.includes('.mov'));
+                  
+                  return (
+                    <div 
+                      key={item.id} 
+                      className={`bg-white p-4 rounded-2xl shadow-xl border flex flex-col justify-between transition ${
+                        item.is_hidden ? 'opacity-60 border-dashed border-red-300 bg-red-50/20' : 'border-slate-200'
+                      }`}
+                    >
+                      <div>
+                        {item.image_url && (
+                          <div className="w-full h-44 rounded-xl overflow-hidden mb-3 bg-slate-100 border border-slate-200">
+                            {isVideo ? (
+                              <video controls className="w-full h-full object-cover">
+                                <source src={item.image_url} />
+                              </video>
+                            ) : (
+                              <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
+                            )}
+                          </div>
+                        )}
+
+                        <div className="flex justify-between items-start gap-2 mb-2">
+                          <h4 className="font-extrabold text-slate-900 text-base leading-tight">
+                            {item.title}
+                          </h4>
+                          <div className="flex items-center gap-1">
+                            {!item.is_approved && (
+                              <span className="text-[9px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full">
+                                পেন্ডিং
+                              </span>
+                            )}
+                            <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full shrink-0 ${
+                              item.listing_type === 'ভাড়া' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'
+                            }`}>
+                              {item.listing_type}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 text-xs font-black text-amber-700 mb-2">
+                          <span>মূল্য/ভাড়া: {item.price}</span>
+                        </div>
+
+                        <p className="text-xs text-slate-600 font-semibold flex items-center gap-1 mb-2">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                          {item.address} ({item.upazila})
+                        </p>
+
+                        {item.description && (
+                          <p className="text-xs text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100 mb-3 font-medium">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                        <a
+                          href={`tel:${item.phone}`}
+                          className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 shadow-sm active:scale-95 transition"
+                        >
+                          <Phone className="w-3.5 h-3.5" /> কল দিন ({item.phone})
+                        </a>
+
+                        {isOwner && (
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              onClick={() => toggleHideListing(item.id, item.is_hidden)}
+                              className={`p-2 rounded-xl border text-xs font-bold flex items-center transition ${
+                                item.is_hidden ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-slate-100 text-slate-700 border-slate-200'
+                              }`}
+                            >
+                              {item.is_hidden ? <EyeOff className="w-4 h-4 text-red-600" /> : <Eye className="w-4 h-4 text-slate-600" />}
+                            </button>
+                            <button
+                              onClick={() => deleteListing(item.id)}
+                              className="p-2 rounded-xl bg-red-100 text-red-700 hover:bg-red-200 border border-red-200 transition"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </section>
+        )}
+
         {activeTab === 'home' && (
           <>
-            {/* Weather & Agriculture bar */}
             <div className="mb-4 bg-gradient-to-r from-sky-600 to-teal-700 rounded-2xl p-3.5 text-white shadow-xl flex items-center justify-between border-2 border-sky-300">
               <div className="flex items-center gap-3">
                 <CloudSun className="w-8 h-8 text-amber-300 shrink-0" />
                 <div>
-                  <h4 className="font-extrabold text-xs">ঠাকুরগাঁও আবহাওয়া ও কৃষি বার্তা</h4>
-                  <p className="text-[11px] text-sky-100 font-semibold">তাপমাত্রা: ২৮°সে • আবহাওয়া অনুকূল, আলু ও ভুট্টার সেচ উপযোগী</p>
+                  <h4 className="font-extrabold text-xs">ঠাকুরগাঁও লাইভ আবহাওয়া ও কৃষি বার্তা</h4>
+                  <p className="text-[11px] text-sky-100 font-semibold">
+                    তাপমাত্রা: {weatherData.temp}°সে • {weatherData.condition}
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* M/S Sarman Traders */}
             <section className="mb-5">
               <div className="relative bg-white rounded-2xl p-4 shadow-2xl border-2 border-amber-400 overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-amber-100 to-transparent rounded-bl-full pointer-events-none"></div>
@@ -502,15 +1057,11 @@ export default function App() {
               </div>
             </section>
 
-            {/* Popular Categories */}
             <section className="bg-white rounded-2xl p-4 shadow-xl border border-slate-200 mb-5">
               <div className="flex justify-between items-center mb-3">
                 <h2 className="text-xs font-extrabold text-slate-700 uppercase tracking-wider">জনপ্রিয় ক্যাটাগরি</h2>
                 {selectedCategory && (
-                  <button 
-                    onClick={() => setSelectedCategory(null)}
-                    className="text-xs text-emerald-800 font-bold hover:underline"
-                  >
+                  <button onClick={() => setSelectedCategory(null)} className="text-xs text-emerald-800 font-bold hover:underline">
                     সব দেখুন
                   </button>
                 )}
@@ -524,15 +1075,11 @@ export default function App() {
                       key={cat.id}
                       onClick={() => setSelectedCategory(isSelected ? null : cat.name)}
                       className={`flex flex-col items-center p-2 rounded-xl border transition ${
-                        isSelected 
-                          ? 'bg-emerald-50 border-emerald-600 text-emerald-900 font-bold shadow-sm' 
-                          : 'border-transparent hover:bg-slate-50 text-slate-700'
+                        isSelected ? 'bg-emerald-50 border-emerald-600 text-emerald-900 font-bold shadow-sm' : 'border-transparent hover:bg-slate-50 text-slate-700'
                       }`}
                     >
                       <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-1.5 transition ${
-                        isSelected 
-                          ? 'bg-emerald-700 text-white shadow-md shadow-emerald-700/20' 
-                          : 'bg-emerald-100 text-emerald-800'
+                        isSelected ? 'bg-emerald-700 text-white shadow-md shadow-emerald-700/20' : 'bg-emerald-100 text-emerald-800'
                       }`}>
                         <IconComp className="w-5 h-5" />
                       </div>
@@ -543,7 +1090,6 @@ export default function App() {
               </div>
             </section>
 
-            {/* Services List */}
             <section className="space-y-3">
               <div className="flex justify-between items-center px-1">
                 <h2 className="text-sm font-bold text-white drop-shadow">উপলব্ধ সেবাসমূহ</h2>
@@ -561,10 +1107,7 @@ export default function App() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {filteredServices.map((service) => (
-                    <div 
-                      key={service.id} 
-                      className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition flex flex-col justify-between"
-                    >
+                    <div key={service.id} className="bg-white p-4 rounded-2xl shadow-xl border border-slate-200 hover:shadow-2xl transition flex flex-col justify-between">
                       <div>
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -591,8 +1134,7 @@ export default function App() {
                           href={`tel:${service.primary_phone}`}
                           className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition"
                         >
-                          <Phone className="w-3.5 h-3.5" />
-                          কল করুন ({service.primary_phone})
+                          <Phone className="w-3.5 h-3.5" /> কল করুন ({service.primary_phone})
                         </a>
                       </div>
                     </div>
@@ -603,7 +1145,6 @@ export default function App() {
           </>
         )}
 
-        {/* Tourism Tab */}
         {activeTab === 'tourism' && (
           <section className="space-y-3">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-amber-300">
@@ -619,9 +1160,7 @@ export default function App() {
                   <div>
                     <div className="flex justify-between items-start">
                       <h4 className="font-extrabold text-slate-900 text-sm sm:text-base">{spot.name}</h4>
-                      <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full shrink-0">
-                        ঐতিহাসিক স্থান
-                      </span>
+                      <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full shrink-0">ঐতিহাসিক স্থান</span>
                     </div>
                     <p className="text-xs text-emerald-700 font-bold flex items-center gap-1 mt-1 mb-2">
                       <MapPin className="w-3.5 h-3.5 text-emerald-600" /> {spot.place}
@@ -636,7 +1175,6 @@ export default function App() {
           </section>
         )}
 
-        {/* Transport Tab */}
         {activeTab === 'transport' && (
           <section className="space-y-4">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-sky-300">
@@ -649,9 +1187,7 @@ export default function App() {
                     <div>
                       <div className="flex justify-between items-start">
                         <h4 className="font-bold text-slate-800 text-xs sm:text-sm">{train.name}</h4>
-                        <span className="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">
-                          ছুটি: {train.offDay}
-                        </span>
+                        <span className="text-[10px] bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">ছুটি: {train.offDay}</span>
                       </div>
                       <p className="text-xs text-slate-600 font-medium mt-1">{train.route}</p>
                     </div>
@@ -672,10 +1208,7 @@ export default function App() {
                       <h4 className="font-bold text-slate-800 text-xs sm:text-sm">{bus.name}</h4>
                       <p className="text-[11px] text-slate-500 font-semibold">{bus.location}</p>
                     </div>
-                    <a
-                      href={`tel:${bus.phone}`}
-                      className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm shrink-0"
-                    >
+                    <a href={`tel:${bus.phone}`} className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm shrink-0">
                       <Phone className="w-3.5 h-3.5" /> কল
                     </a>
                   </div>
@@ -685,7 +1218,6 @@ export default function App() {
           </section>
         )}
 
-        {/* Agriculture Guide Tab */}
         {activeTab === 'agri' && (
           <section className="space-y-4">
             <div className="bg-white rounded-2xl p-4 shadow-xl border-2 border-emerald-400">
@@ -714,17 +1246,13 @@ export default function App() {
                 <h4 className="font-bold text-amber-950 text-xs sm:text-sm">উপজেলা কৃষি অফিস হটলাইন</h4>
                 <p className="text-[11px] text-amber-800 font-semibold">যেকোনো কৃষি তথ্যের জন্য সরকারি হেল্পলাইন।</p>
               </div>
-              <a
-                href="tel:16123"
-                className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1 shadow-md"
-              >
+              <a href="tel:16123" className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1 shadow-md">
                 <Phone className="w-3.5 h-3.5" /> ১৬১২৩
               </a>
             </div>
           </section>
         )}
 
-        {/* Blood Donation Tab */}
         {activeTab === 'blood' && (
           <section className="space-y-4">
             <div className="bg-white rounded-2xl p-4 flex items-center gap-3 shadow-xl border-2 border-rose-200">
@@ -741,9 +1269,7 @@ export default function App() {
                   key={grp}
                   onClick={() => setSelectedBloodGroup(grp)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold shrink-0 transition shadow-md ${
-                    selectedBloodGroup === grp 
-                      ? 'bg-rose-600 text-white' 
-                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                    selectedBloodGroup === grp ? 'bg-rose-600 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                   }`}
                 >
                   {grp === 'All' ? 'সকল গ্রুপ' : grp}
@@ -769,19 +1295,10 @@ export default function App() {
                     </div>
                   </div>
                   <div className="flex gap-1.5 shrink-0">
-                    <a
-                      href={`https://wa.me/88${donor.phone}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold p-2 rounded-xl flex items-center transition shadow-md"
-                      title="WhatsApp মেসেজ"
-                    >
+                    <a href={`https://wa.me/88${donor.phone}`} target="_blank" rel="noopener noreferrer" className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold p-2 rounded-xl flex items-center transition shadow-md">
                       <MessageCircle className="w-4 h-4" />
                     </a>
-                    <a
-                      href={`tel:${donor.phone}`}
-                      className="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md"
-                    >
+                    <a href={`tel:${donor.phone}`} className="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md">
                       <Phone className="w-3.5 h-3.5" /> কল
                     </a>
                   </div>
@@ -791,7 +1308,6 @@ export default function App() {
           </section>
         )}
 
-        {/* Ambulance Tab */}
         {activeTab === 'ambulance' && (
           <section className="space-y-3">
             <div className="bg-white rounded-2xl p-4 flex items-center gap-3 shadow-xl border-2 border-teal-200">
@@ -811,10 +1327,7 @@ export default function App() {
                       <MapPin className="w-3 h-3 text-slate-400" /> উপজেলা: {item.place}
                     </p>
                   </div>
-                  <a
-                    href={`tel:${item.phone}`}
-                    className="bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md shrink-0"
-                  >
+                  <a href={`tel:${item.phone}`} className="bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 transition shadow-md shrink-0">
                     <PhoneCall className="w-3.5 h-3.5" /> কল
                   </a>
                 </div>
@@ -823,7 +1336,6 @@ export default function App() {
           </section>
         )}
 
-        {/* Emergency SOS Tab */}
         {activeTab === 'emergency' && (
           <section className="space-y-3">
             <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5 flex items-center gap-3 shadow-xl">
@@ -840,12 +1352,8 @@ export default function App() {
                     <h4 className="font-extrabold text-slate-900 text-sm">{hotline.title}</h4>
                     <p className="text-xs text-slate-600 font-semibold mt-0.5">{hotline.desc}</p>
                   </div>
-                  <a
-                    href={`tel:${hotline.phone}`}
-                    className="bg-red-500 hover:bg-red-600 text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition shrink-0"
-                  >
-                    <PhoneCall className="w-3.5 h-3.5" />
-                    {hotline.phone}
+                  <a href={`tel:${hotline.phone}`} className="bg-red-500 hover:bg-red-600 text-white text-xs font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition shrink-0">
+                    <PhoneCall className="w-3.5 h-3.5" /> {hotline.phone}
                   </a>
                 </div>
               ))}
@@ -853,7 +1361,6 @@ export default function App() {
           </section>
         )}
 
-        {/* 👨‍💻 Developer Identity Footer Section (Moved to Bottom Footer) */}
         <footer className="mt-12 bg-gradient-to-br from-slate-900 via-slate-850 to-slate-800 text-white rounded-3xl p-6 shadow-2xl relative overflow-hidden border border-slate-700">
           <div className="absolute top-0 right-0 -mt-6 -mr-6 w-32 h-32 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
           
@@ -876,38 +1383,317 @@ export default function App() {
             </p>
 
             <div className="flex items-center justify-between pt-3 border-t border-slate-700 text-xs">
-              <a 
-                href="https://www.facebook.com/ak.sarman.ak" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition font-medium"
-              >
-                <Share2 className="w-3.5 h-3.5 text-blue-400" />
-                <span>ফেসবুক প্রোফাইল</span>
+              <a href="https://www.facebook.com/ak.sarman.ak" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition font-medium">
+                <Share2 className="w-3.5 h-3.5 text-blue-400" /> <span>ফেসবুক প্রোফাইল</span>
               </a>
 
-              <a 
-                href="http://iccheghurirdana.blogspot.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-bold transition"
-              >
-                <span>পোর্টফোলিও ভিজিট</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+              <a href="http://iccheghurirdana.blogspot.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-bold transition">
+                <span>পোর্টফোলিও ভিজিট</span> <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
         </footer>
       </main>
 
-      {/* Add Service Modal */}
+      {/* Auth Modal (Login / Sign Up) */}
+      {showAuthModal && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-amber-400">
+            <button onClick={() => { setShowAuthModal(false); setAuthMessage(''); }} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-2">
+              <KeyRound className="w-6 h-6 text-amber-600" />
+              <h3 className="font-extrabold text-slate-900 text-base">
+                {authMode === 'login' ? 'অ্যাকাউন্টে লগইন করুন' : 'নতুন অ্যাকাউন্ট তৈরি করুন'}
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">বিজ্ঞাপন দিতে ও নিজের পোস্ট নিয়ন্ত্রণ করতে লগইন থাকা আবশ্যক।</p>
+
+            {authMessage && (
+              <div className="bg-amber-50 text-amber-900 border border-amber-200 p-2.5 rounded-xl text-xs font-bold mb-3 text-center">
+                {authMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleAuth} className="space-y-3 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">ইমেইল ঠিকানা *</label>
+                <input
+                  required
+                  type="email"
+                  placeholder="name@example.com"
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none"
+                />
+              </div>
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">পাসওয়ার্ড *</label>
+                <input
+                  required
+                  type="password"
+                  placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড"
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none"
+                />
+              </div>
+
+              {authMode === 'signup' && (
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">কনফার্ম পাসওয়ার্ড *</label>
+                  <input
+                    required
+                    type="password"
+                    placeholder="পুনরায় পাসওয়ার্ড দিন"
+                    value={authConfirmPassword}
+                    onChange={(e) => setAuthConfirmPassword(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  />
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2"
+              >
+                {authMode === 'login' ? 'লগইন করুন' : 'রেজিস্ট্রেশন করুন'}
+              </button>
+            </form>
+
+            <div className="mt-4 text-center text-xs text-slate-600">
+              {authMode === 'login' ? (
+                <span>অ্যাকাউন্ট নেই? <button onClick={() => { setAuthMode('signup'); setAuthMessage(''); }} className="text-amber-600 font-bold hover:underline">নতুন অ্যাকাউন্ট খুলুন</button></span>
+              ) : (
+                <span>আগে থেকেই অ্যাকাউন্ট আছে? <button onClick={() => { setAuthMode('login'); setAuthMessage(''); }} className="text-amber-600 font-bold hover:underline">লগইন করুন</button></span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* User Profile Edit Modal with Mandatory Fields */}
+      {showProfileModal && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setShowProfileModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-2">
+              <UserCog className="w-6 h-6 text-emerald-600" />
+              <h3 className="font-extrabold text-slate-900 text-base">ইউজার প্রোফাইল আপডেট</h3>
+            </div>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">নাম, ঠিকানা ও ফোন নম্বর দেওয়া বাধ্যতামূলক (Mandatory)।</p>
+
+            <form onSubmit={handleProfileUpdate} className="space-y-3 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">পূর্ণ নাম *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="যেমন: Md. Sarman Rana"
+                  value={profileData.full_name}
+                  onChange={(e) => setProfileData({...profileData, full_name: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">ভ্যালিড মোবাইল নম্বর *</label>
+                <input
+                  required
+                  type="tel"
+                  placeholder="017xxxxxxxx"
+                  value={profileData.phone}
+                  onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">ঠিকানা *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="যেমন: হরিপুর সদর, ঠাকুরগাঁও"
+                  value={profileData.address}
+                  onChange={(e) => setProfileData({...profileData, address: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">প্রোফাইল ছবি (Avatar)</label>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
+                  <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setProfileAvatarFile(e.target.files[0])}
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+              >
+                {uploading ? 'আপডেট হচ্ছে...' : <><Send className="w-4 h-4" /> প্রোফাইল সেভ করুন</>}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add Market / Rent Listing Modal */}
+      {showListingModal && (
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-5 max-w-md w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
+            <button onClick={() => setShowListingModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-2">
+              <ShoppingBag className="w-6 h-6 text-emerald-600" />
+              <h3 className="font-extrabold text-slate-900 text-base">বিজ্ঞাপন পোস্টিং ফর্ম</h3>
+            </div>
+            
+            <div className="bg-amber-50 border border-amber-300 p-3 rounded-2xl mb-3 text-[11px] text-amber-950">
+              <p className="font-extrabold mb-1">📢 পোস্টিং ফি ও নিয়মাবলী:</p>
+              <p>বিজ্ঞাপন প্রতি ফি <b>২০ টাকা</b>। বিকাশ/নগদ পার্সোনাল নম্বরে (<b>01744857273</b>) টাকা পাঠিয়ে নিচের ঘরে TrxID দিন।</p>
+            </div>
+
+            <form onSubmit={handleListingSubmit} className="space-y-3 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">বিজ্ঞাপনের শিরোনাম *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="যেমন: ৩ রুমের বাসা ভাড়া / বাইক বিক্রি"
+                  value={newListing.title}
+                  onChange={(e) => setNewListing({...newListing, title: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">ধরণ *</label>
+                  <select
+                    value={newListing.listing_type}
+                    onChange={(e) => setNewListing({...newListing, listing_type: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  >
+                    <option value="বিক্রয়">বিক্রয় (Sell)</option>
+                    <option value="ভাড়া">ভাড়া (Rent)</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">মূল্য / ভাড়া *</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="৫,০০০ ৳"
+                    value={newListing.price}
+                    onChange={(e) => setNewListing({...newListing, price: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-purple-800 block mb-1">বিকাশ/নগদ ট্রানজেকশন আইডি (TrxID) *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="যেমন: 9N7X4K8L"
+                  value={newListing.trx_id}
+                  onChange={(e) => setNewListing({...newListing, trx_id: e.target.value})}
+                  className="w-full bg-purple-50 border border-purple-300 rounded-xl px-3 py-2 font-bold text-purple-950 focus:ring-2 focus:ring-purple-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">ছবি বা ভিডিও আপলোড করুন (Media)</label>
+                <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
+                  <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
+                  <input
+                    type="file"
+                    accept="image/*,video/*"
+                    onChange={(e) => setImageFile(e.target.files[0])}
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">মোবাইল নম্বর *</label>
+                <input
+                  required
+                  type="tel"
+                  placeholder="017xxxxxxxx"
+                  value={newListing.phone}
+                  onChange={(e) => setNewListing({...newListing, phone: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">উপজেলা *</label>
+                  <select
+                    value={newListing.upazila}
+                    onChange={(e) => setNewListing({...newListing, upazila: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  >
+                    {upazilaList.map((u, i) => <option key={i} value={u}>{u}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">নির্দিষ্ট এলাকা *</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="চৌরঙ্গী বাজার"
+                    value={newListing.address}
+                    onChange={(e) => setNewListing({...newListing, address: e.target.value})}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">বিস্তারিত বিবরণ</label>
+                <textarea
+                  rows="2"
+                  placeholder="অন্যান্য শর্তাদি..."
+                  value={newListing.description}
+                  onChange={(e) => setNewListing({...newListing, description: e.target.value})}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+              >
+                {uploading ? 'প্রসেসিং হচ্ছে...' : <><Send className="w-4 h-4" /> বিজ্ঞাপন জমা দিন (Submit)</>}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       {showAddModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-emerald-500">
-            <button 
-              onClick={() => setShowAddModal(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"
-            >
+            <button onClick={() => setShowAddModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
               <X className="w-5 h-5" />
             </button>
 
@@ -915,16 +1701,16 @@ export default function App() {
               <PlusCircle className="w-6 h-6 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900 text-base">নতুন সেবা যুক্ত করুন</h3>
             </div>
-            <p className="text-xs text-slate-500 mb-4 font-semibold">আপনার প্রতিষ্ঠান বা সেবার তথ্য দিন, যাচাই করে অ্যাপে যুক্ত করা হবে।</p>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">আপনার প্রতিষ্ঠান বা সেবার তথ্য দিন।</p>
 
             {formSubmitted ? (
               <div className="bg-emerald-50 text-emerald-800 p-4 rounded-2xl text-center text-xs font-bold border border-emerald-200">
-                ✅ আপনার তথ্যটি সফলভাবে গৃহীত হয়েছে! শীঘ্রই তা যাচাই করে তালিকায় যুক্ত করা হবে।
+                ✅ আপনার তথ্যটি সফলভাবে গৃহীত হয়েছে!
               </div>
             ) : (
               <form onSubmit={handleAddSubmit} className="space-y-3 text-xs">
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">সেবা বা প্রতিষ্ঠানের নাম *</label>
+                  <label className="font-bold text-slate-700 block mb-1">সেবার নাম *</label>
                   <input
                     required
                     type="text"
@@ -939,7 +1725,7 @@ export default function App() {
                   <input
                     required
                     type="tel"
-                    placeholder="যেমন: 017xxxxxxxx"
+                    placeholder="017xxxxxxxx"
                     value={newService.phone}
                     onChange={(e) => setNewService({...newService, phone: e.target.value})}
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
@@ -960,7 +1746,7 @@ export default function App() {
                   <input
                     required
                     type="text"
-                    placeholder="যেমন: চৌরঙ্গী বাজার, হরিপুর"
+                    placeholder="চৌরঙ্গী বাজার, হরিপুর"
                     value={newService.address}
                     onChange={(e) => setNewService({...newService, address: e.target.value})}
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
@@ -978,39 +1764,22 @@ export default function App() {
         </div>
       )}
 
-      {/* Mobile Bottom Navigation Bar */}
       <nav className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-white/10 py-2.5 px-4 z-40 shadow-2xl">
         <div className="max-w-md md:max-w-3xl lg:max-w-5xl mx-auto flex justify-around items-center">
-          <button 
-            onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center gap-1 transition ${activeTab === 'home' ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}
-          >
-            <Home className="w-5 h-5" />
-            <span className="text-[10px]">হোম</span>
+          <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'home' ? 'text-emerald-400 font-bold' : 'text-slate-400'}`}>
+            <Home className="w-5 h-5" /> <span className="text-[10px]">হোম</span>
           </button>
-
-          <button 
-            onClick={() => setActiveTab('blood')}
-            className={`flex flex-col items-center gap-1 transition ${activeTab === 'blood' ? 'text-rose-400 font-bold' : 'text-slate-400'}`}
-          >
-            <Droplet className="w-5 h-5" />
-            <span className="text-[10px]">রক্তদান</span>
+          <button onClick={() => setActiveTab('market')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'market' ? 'text-amber-400 font-bold' : 'text-slate-400'}`}>
+            <ShoppingBag className="w-5 h-5" /> <span className="text-[10px]">বাজার/ভাড়া</span>
           </button>
-
-          <button 
-            onClick={() => setActiveTab('ambulance')}
-            className={`flex flex-col items-center gap-1 transition ${activeTab === 'ambulance' ? 'text-teal-300 font-bold' : 'text-slate-400'}`}
-          >
-            <Siren className="w-5 h-5" />
-            <span className="text-[10px]">অ্যাম্বুলেন্স</span>
+          <button onClick={() => setActiveTab('blood')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'blood' ? 'text-rose-400 font-bold' : 'text-slate-400'}`}>
+            <Droplet className="w-5 h-5" /> <span className="text-[10px]">রক্তদান</span>
           </button>
-
-          <button 
-            onClick={() => setActiveTab('emergency')}
-            className={`flex flex-col items-center gap-1 transition ${activeTab === 'emergency' ? 'text-red-400 font-bold' : 'text-slate-400'}`}
-          >
-            <PhoneCall className="w-5 h-5" />
-            <span className="text-[10px]">জরুরি SOS</span>
+          <button onClick={() => setActiveTab('ambulance')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'ambulance' ? 'text-teal-300 font-bold' : 'text-slate-400'}`}>
+            <Siren className="w-5 h-5" /> <span className="text-[10px]">অ্যাম্বুলেন্স</span>
+          </button>
+          <button onClick={() => setActiveTab('emergency')} className={`flex flex-col items-center gap-1 transition ${activeTab === 'emergency' ? 'text-red-400 font-bold' : 'text-slate-400'}`}>
+            <PhoneCall className="w-5 h-5" /> <span className="text-[10px]">জরুরি SOS</span>
           </button>
         </div>
       </nav>
