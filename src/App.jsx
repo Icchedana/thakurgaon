@@ -179,26 +179,19 @@ export default function App() {
     fetchTouristSpots();
     fetchLiveWeather();
 
-    // Check URL parameters for Password Reset recovery code
-    const queryParams = new URLSearchParams(window.location.search);
-    const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    
-    if (queryParams.get('type') === 'recovery' || hashParams.get('type') === 'recovery' || queryParams.has('code') || hashParams.has('code')) {
+    // Check URL parameters for Password Reset recovery code immediately
+    const hash = window.location.hash;
+    const search = window.location.search;
+    if (hash.includes('type=recovery') || search.includes('type=recovery') || search.includes('code=')) {
       setIsPasswordResetMode(true);
     }
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) fetchUserProfile(session.user.id);
-    });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) fetchUserProfile(session.user.id);
-      else setIsAdmin(false);
-
       if (event === 'PASSWORD_RECOVERY') {
         setIsPasswordResetMode(true);
+      } else {
+        setUser(session?.user ?? null);
+        if (session?.user) fetchUserProfile(session.user.id);
       }
     });
 
@@ -211,7 +204,7 @@ export default function App() {
     if (error) {
       alert('ত্রুটি: ' + error.message);
     } else {
-      alert('পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে! এবার নতুন পাসওয়ার্ড দিয়ে লগইন করুন।');
+      alert('পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
       setIsPasswordResetMode(false);
       await supabase.auth.signOut();
       window.location.href = window.location.origin;
