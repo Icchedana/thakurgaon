@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 
-export default function Login() {
+export default function Login({ onSwitchToSignup }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isResetMode, setIsResetMode] = useState(false); // Forgot password mode state
+  const [isResetMode, setIsResetMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -41,7 +41,7 @@ export default function Login() {
     setMessage('');
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin,
+      redirectTo: 'https://thakurgao.vercel.app/',
     });
 
     if (error) {
@@ -76,7 +76,6 @@ export default function Login() {
       )}
 
       {isResetMode ? (
-        // Reset Password Form
         <form onSubmit={handleForgotPasswordSubmit}>
           <div style={{ marginBottom: '15px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>আপনার রেজিস্টার্ড ইমেইল দিন</label>
@@ -111,7 +110,6 @@ export default function Login() {
               border: 'none',
               borderRadius: '10px',
               cursor: 'pointer',
-              boxShadow: '0 4px 10px rgba(5, 150, 105, 0.2)',
               marginBottom: '10px'
             }}
           >
@@ -122,22 +120,13 @@ export default function Login() {
             <button 
               type="button"
               onClick={() => { setIsResetMode(false); setMessage(''); }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#059669',
-                fontSize: '12px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                textDecoration: 'underline'
-              }}
+              style={{ background: 'none', border: 'none', color: '#059669', fontSize: '12px', fontWeight: '600', cursor: 'pointer', textDecoration: 'underline' }}
             >
               লগইন পেজে ফিরে যান
             </button>
           </div>
         </form>
       ) : (
-        // Normal Login Form
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '15px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#334155', marginBottom: '6px' }}>ইমেইল অ্যাড্রেস</label>
@@ -182,16 +171,8 @@ export default function Login() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '11px',
-                  color: '#059669',
-                  fontWeight: 'bold'
+                  position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                  background: 'none', border: 'none', cursor: 'pointer', fontSize: '11px', color: '#059669', fontWeight: 'bold'
                 }}
               >
                 {showPassword ? 'লুকান' : 'দেখুন'}
@@ -199,20 +180,18 @@ export default function Login() {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', fontSize: '12px' }}>
+            <button 
+              type="button"
+              onClick={onSwitchToSignup}
+              style={{ background: 'none', border: 'none', color: '#059669', fontWeight: '600', cursor: 'pointer', padding: 0 }}
+            >
+              একাউন্ট নেই? রেজিস্টার করুন
+            </button>
             <button 
               type="button"
               onClick={() => { setIsResetMode(true); setMessage(''); }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#059669',
-                fontSize: '12px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                padding: 0,
-                textDecoration: 'underline'
-              }}
+              style={{ background: 'none', border: 'none', color: '#059669', fontWeight: '600', cursor: 'pointer', padding: 0, textDecoration: 'underline' }}
             >
               পাসওয়ার্ড ভুলে গেছেন?
             </button>
@@ -222,16 +201,8 @@ export default function Login() {
             type="submit"
             disabled={loading}
             style={{
-              width: '100%',
-              background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
-              color: '#ffffff',
-              padding: '12px',
-              fontSize: '14px',
-              fontWeight: 'bold',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 10px rgba(5, 150, 105, 0.2)'
+              width: '100%', background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+              color: '#ffffff', padding: '12px', fontSize: '14px', fontWeight: 'bold', border: 'none', borderRadius: '10px', cursor: 'pointer'
             }}
           >
             {loading ? 'লগইন হচ্ছে...' : 'লগইন করুন'}

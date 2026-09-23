@@ -3,12 +3,12 @@ import { supabase } from './supabaseClient';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { 
-  Search, ShieldAlert, HeartPulse, Bus, Briefcase, 
+  Search, ShieldAlert, HeartPulse, Bus, 
   Phone, MapPin, CheckCircle, Home, PhoneCall, AlertTriangle,
   Sun, Award, Sprout, Store, ArrowUpRight, Share2, 
   Droplet, Siren, UserCheck, Check, Zap, Building2,
   Train, Compass, PlusCircle, Send, X, CloudSun, MessageCircle,
-  Bell, ChevronRight, ShoppingBag, Trash2, LogIn, LogOut, KeyRound, Image as ImageIcon, ShieldCheck, User, UserCog
+  Bell, ChevronRight, ShoppingBag, Trash2, LogIn, LogOut, Image as ImageIcon, ShieldCheck, User, UserCog
 } from 'lucide-react';
 
 const SARMAN_PHOTO_IMAGE = "https://i.imgur.com/r2fdggx.png"; 
@@ -213,6 +213,7 @@ export default function App() {
     } else {
       alert('পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে! এবার নতুন পাসওয়ার্ড দিয়ে লগইন করুন।');
       setIsPasswordResetMode(false);
+      await supabase.auth.signOut();
       window.location.href = window.location.origin;
     }
   };
@@ -241,7 +242,7 @@ export default function App() {
 
   const fetchTouristSpots = async () => {
     try {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('tourism')
         .select('*')
         .order('id', { ascending: false });
@@ -259,7 +260,7 @@ export default function App() {
   };
 
   const fetchUserProfile = async (userId) => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
@@ -293,7 +294,7 @@ export default function App() {
         query = query.eq('upazilas.name_bn', selectedUpazila);
       }
 
-      const { data, error } = await query;
+      const { data } = await query;
 
       if (data && data.length > 0) {
         setServices(data.map(item => ({
@@ -1371,7 +1372,7 @@ export default function App() {
         </footer>
       </main>
 
-      {/* Auth Modal using imported Login & Signup components */}
+      {/* Auth Modal */}
       {showAuthModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-amber-400">
@@ -1388,7 +1389,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Password Reset Modal when coming from email link */}
+      {/* Password Reset Modal */}
       {isPasswordResetMode && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border-2 border-emerald-500 relative">
@@ -1418,7 +1419,7 @@ export default function App() {
         </div>
       )}
 
-      {/* User Profile Edit Modal with Mandatory Fields */}
+      {/* Profile Edit Modal */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
@@ -1430,42 +1431,36 @@ export default function App() {
               <UserCog className="w-6 h-6 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900 text-base">ইউজার প্রোফাইল আপডেট</h3>
             </div>
-            <p className="text-xs text-slate-500 mb-4 font-semibold">নাম, ঠিকানা ও ফোন নম্বর দেওয়া বাধ্যতামূলক (Mandatory)।</p>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">নাম, ঠিকানা ও ফোন নম্বর দেওয়া বাধ্যতামূলক।</p>
 
             <form onSubmit={handleProfileUpdate} className="space-y-3 text-xs">
               <div>
                 <label className="font-bold text-slate-700 block mb-1">পূর্ণ নাম *</label>
                 <input
-                  required
-                  type="text"
-                  placeholder="যেমন: Md. Sarman Rana"
+                  required type="text" placeholder="যেমন: Md. Sarman Rana"
                   value={profileData.full_name}
                   onChange={(e) => setProfileData({...profileData, full_name: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 />
               </div>
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">ভ্যালিড মোবাইল নম্বর *</label>
                 <input
-                  required
-                  type="tel"
-                  placeholder="017xxxxxxxx"
+                  required type="tel" placeholder="017xxxxxxxx"
                   value={profileData.phone}
                   onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 />
               </div>
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">ঠিকানা *</label>
                 <input
-                  required
-                  type="text"
-                  placeholder="যেমন: হরিপুর সদর, ঠাকুরগাঁও"
+                  required type="text" placeholder="যেমন: হরিপুর সদর, ঠাকুরগাঁও"
                   value={profileData.address}
                   onChange={(e) => setProfileData({...profileData, address: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 />
               </div>
 
@@ -1474,18 +1469,16 @@ export default function App() {
                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
                   <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
                   <input
-                    type="file"
-                    accept="image/*"
+                    type="file" accept="image/*"
                     onChange={(e) => setProfileAvatarFile(e.target.files[0])}
-                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 cursor-pointer"
                   />
                 </div>
               </div>
 
               <button
-                type="submit"
-                disabled={uploading}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+                type="submit" disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
               >
                 {uploading ? 'আপডেট হচ্ছে...' : <><Send className="w-4 h-4" /> প্রোফাইল সেভ করুন</>}
               </button>
@@ -1494,7 +1487,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Add Market / Rent Listing Modal */}
+      {/* Add Listing Modal */}
       {showListingModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-md w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
@@ -1516,12 +1509,10 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">বিজ্ঞাপনের শিরোনাম *</label>
                 <input
-                  required
-                  type="text"
-                  placeholder="যেমন: ৩ রুমের বাসা ভাড়া / বাইক বিক্রি"
+                  required type="text" placeholder="যেমন: ৩ রুমের বাসা ভাড়া / বাইক বিক্রি"
                   value={newListing.title}
                   onChange={(e) => setNewListing({...newListing, title: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 />
               </div>
 
@@ -1531,7 +1522,7 @@ export default function App() {
                   <select
                     value={newListing.listing_type}
                     onChange={(e) => setNewListing({...newListing, listing_type: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   >
                     <option value="বিক্রয়">বিক্রয় (Sell)</option>
                     <option value="ভাড়া">ভাড়া (Rent)</option>
@@ -1540,12 +1531,10 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">মূল্য / ভাড়া *</label>
                   <input
-                    required
-                    type="text"
-                    placeholder="৫,০০০ ৳"
+                    required type="text" placeholder="৫,০০০ ৳"
                     value={newListing.price}
                     onChange={(e) => setNewListing({...newListing, price: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   />
                 </div>
               </div>
@@ -1553,12 +1542,10 @@ export default function App() {
               <div>
                 <label className="font-bold text-purple-800 block mb-1">বিকাশ/নগদ ট্রানজেকশন আইডি (TrxID) *</label>
                 <input
-                  required
-                  type="text"
-                  placeholder="যেমন: 9N7X4K8L"
+                  required type="text" placeholder="যেমন: 9N7X4K8L"
                   value={newListing.trx_id}
                   onChange={(e) => setNewListing({...newListing, trx_id: e.target.value})}
-                  className="w-full bg-purple-50 border border-purple-300 rounded-xl px-3 py-2 font-bold text-purple-950 focus:ring-2 focus:ring-purple-500 outline-none"
+                  className="w-full bg-purple-50 border border-purple-300 rounded-xl px-3 py-2 font-bold text-purple-950 outline-none"
                 />
               </div>
 
@@ -1567,10 +1554,9 @@ export default function App() {
                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
                   <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
                   <input
-                    type="file"
-                    accept="image/*,video/*"
+                    type="file" accept="image/*,video/*"
                     onChange={(e) => setImageFile(e.target.files[0])}
-                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 cursor-pointer"
                   />
                 </div>
               </div>
@@ -1578,12 +1564,10 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">মোবাইল নম্বর *</label>
                 <input
-                  required
-                  type="tel"
-                  placeholder="017xxxxxxxx"
+                  required type="tel" placeholder="017xxxxxxxx"
                   value={newListing.phone}
                   onChange={(e) => setNewListing({...newListing, phone: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 />
               </div>
 
@@ -1593,7 +1577,7 @@ export default function App() {
                   <select
                     value={newListing.upazila}
                     onChange={(e) => setNewListing({...newListing, upazila: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   >
                     {upazilaList.map((u, i) => <option key={i} value={u}>{u}</option>)}
                   </select>
@@ -1601,12 +1585,10 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">নির্দিষ্ট এলাকা *</label>
                   <input
-                    required
-                    type="text"
-                    placeholder="চৌরঙ্গী বাজার"
+                    required type="text" placeholder="চৌরঙ্গী বাজার"
                     value={newListing.address}
                     onChange={(e) => setNewListing({...newListing, address: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   />
                 </div>
               </div>
@@ -1614,18 +1596,16 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">বিস্তারিত বিবরণ</label>
                 <textarea
-                  rows="2"
-                  placeholder="অন্যান্য শর্তাদি..."
+                  rows="2" placeholder="অন্যান্য শর্তাদি..."
                   value={newListing.description}
                   onChange={(e) => setNewListing({...newListing, description: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                 ></textarea>
               </div>
 
               <button
-                type="submit"
-                disabled={uploading}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+                type="submit" disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
               >
                 {uploading ? 'প্রসেসিং হচ্ছে...' : <><Send className="w-4 h-4" /> বিজ্ঞাপন জমা দিন (Submit)</>}
               </button>
@@ -1656,23 +1636,19 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">সেবার নাম *</label>
                   <input
-                    required
-                    type="text"
-                    placeholder="যেমন: আল-মদিনা ফার্মেসি"
+                    required type="text" placeholder="যেমন: আল-মদিনা ফার্মেসি"
                     value={newService.title}
                     onChange={(e) => setNewService({...newService, title: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   />
                 </div>
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">ফোন নম্বর *</label>
                   <input
-                    required
-                    type="tel"
-                    placeholder="017xxxxxxxx"
+                    required type="tel" placeholder="017xxxxxxxx"
                     value={newService.phone}
                     onChange={(e) => setNewService({...newService, phone: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   />
                 </div>
                 <div>
@@ -1680,7 +1656,7 @@ export default function App() {
                   <select
                     value={newService.upazila}
                     onChange={(e) => setNewService({...newService, upazila: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   >
                     {upazilaList.map((u, i) => <option key={i} value={u}>{u}</option>)}
                   </select>
@@ -1688,17 +1664,15 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">ঠিকানা *</label>
                   <input
-                    required
-                    type="text"
-                    placeholder="চৌরঙ্গী বাজার, হরিপুর"
+                    required type="text" placeholder="চৌরঙ্গী বাজার, হরিপুর"
                     value={newService.address}
                     onChange={(e) => setNewService({...newService, address: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2"
+                  className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2"
                 >
                   <Send className="w-4 h-4" /> আবেদন জমা দিন
                 </button>
