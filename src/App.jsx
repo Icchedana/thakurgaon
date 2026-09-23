@@ -140,7 +140,6 @@ export default function App() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState('login'); 
 
-  // Password Recovery State
   const [isPasswordResetMode, setIsPasswordResetMode] = useState(false);
   const [newPassword, setNewPassword] = useState('');
 
@@ -179,7 +178,6 @@ export default function App() {
     fetchTouristSpots();
     fetchLiveWeather();
 
-    // Check URL parameters for Password Reset recovery code immediately
     const hash = window.location.hash;
     const search = window.location.search;
     if (hash.includes('type=recovery') || search.includes('type=recovery') || search.includes('code=')) {
@@ -266,12 +264,7 @@ export default function App() {
         address: data.address || '',
         avatar_url: data.avatar_url || ''
       });
-
-      if (data.role === 'admin') {
-        setIsAdmin(true);
-      } else {
-        setIsAdmin(false);
-      }
+      setIsAdmin(data.role === 'admin');
     }
   };
 
@@ -331,6 +324,7 @@ export default function App() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setIsAdmin(false);
+    setUser(null);
   };
 
   const handleProfileUpdate = async (e) => {
