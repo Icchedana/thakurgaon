@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
-import Login from './components/Login';
-import Signup from './components/Signup';
 import { 
-  Search, ShieldAlert, HeartPulse, Bus, 
+  Search, ShieldAlert, HeartPulse, Bus, Briefcase, 
   Phone, MapPin, CheckCircle, Home, PhoneCall, AlertTriangle,
   Sun, Award, Sprout, Store, ArrowUpRight, Share2, 
   Droplet, Siren, UserCheck, Check, Zap, Building2,
   Train, Compass, PlusCircle, Send, X, CloudSun, MessageCircle,
-  Bell, ChevronRight, ShoppingBag, Trash2, LogIn, LogOut, Image as ImageIcon, ShieldCheck, User, UserCog
+  Bell, ChevronRight, ShoppingBag, Eye, EyeOff, Trash2, LogIn, LogOut, KeyRound, Image as ImageIcon, ShieldCheck, User, UserCog, Cloud, Thermometer
 } from 'lucide-react';
 
-const SARMAN_PHOTO_IMAGE = "https://i.imgur.com/r2fdggx.png"; 
+const SARMAN_PHOTO_DATA = [
+  "data:image/webp;base64,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"
+].join('');
 
 function SarmanProfileSVG() {
   return (
-    <div className="w-full h-full rounded-2xl overflow-hidden bg-slate-800 flex items-center justify-center">
-      <img
-        src={SARMAN_PHOTO_IMAGE}
-        alt="Md. Sarman Rana"
-        className="w-full h-full object-cover"
+    <svg viewBox="0 0 140 140" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="userCircleClip">
+          <circle cx="70" cy="70" r="70" />
+        </clipPath>
+      </defs>
+      <image
+        href={SARMAN_PHOTO_DATA}
+        width="140"
+        height="140"
+        preserveAspectRatio="xMidYMid slice"
+        clipPath="url(#userCircleClip)"
       />
-    </div>
+    </svg>
   );
 }
 
@@ -133,20 +140,31 @@ export default function App() {
   const [newService, setNewService] = useState({ title: '', phone: '', address: '', upazila: 'হরিপুর', category: 'জরুরি সেবা' });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  // Weather State (Live API)
   const [weatherData, setWeatherData] = useState({ temp: '২৮', condition: 'অনুকূল, আলু ও ভুট্টার সেচ উপযোগী' });
 
+  // Authentication & Admin State
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState('login'); 
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authConfirmPassword, setAuthConfirmPassword] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
 
+  // Password Recovery / Reset State
   const [isPasswordResetMode, setIsPasswordResetMode] = useState(false);
   const [newPassword, setNewPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isResetRequestMode, setIsResetRequestMode] = useState(false);
 
+  // User Profile State
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [profileData, setProfileData] = useState({ full_name: '', phone: '', address: '', avatar_url: '' });
   const [profileAvatarFile, setProfileAvatarFile] = useState(null);
 
+  // Market & Rent Listings State
   const [listings, setListings] = useState([]);
   const [marketFilter, setMarketFilter] = useState('All'); 
   const [showListingModal, setShowListingModal] = useState(false);
@@ -178,11 +196,17 @@ export default function App() {
     fetchTouristSpots();
     fetchLiveWeather();
 
+    // Check URL parameters for Password Reset recovery code immediately
     const hash = window.location.hash;
     const search = window.location.search;
     if (hash.includes('type=recovery') || search.includes('type=recovery') || search.includes('code=')) {
       setIsPasswordResetMode(true);
     }
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) fetchUserProfile(session.user.id);
+    });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'PASSWORD_RECOVERY') {
@@ -209,6 +233,23 @@ export default function App() {
     }
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!authEmail) {
+      setAuthMessage('অনুগ্রহ করে প্রথমে আপনার ইমেইল লিখুন।');
+      return;
+    }
+    const { error } = await supabase.auth.resetPasswordForEmail(authEmail, {
+      redirectTo: window.location.origin,
+    });
+    if (error) {
+      setAuthMessage(error.message);
+    } else {
+      setAuthMessage('পাসওয়ার্ড রিকভারি লিংক আপনার ইমেলে পাঠানো হয়েছে!');
+    }
+  };
+
+  // Live Weather Fetcher for Thakurgaon
   const fetchLiveWeather = async () => {
     try {
       const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=26.0336&longitude=88.4616&current=temperature_2m,weather_code');
@@ -233,7 +274,7 @@ export default function App() {
 
   const fetchTouristSpots = async () => {
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('tourism')
         .select('*')
         .order('id', { ascending: false });
@@ -251,7 +292,7 @@ export default function App() {
   };
 
   const fetchUserProfile = async (userId) => {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
@@ -264,7 +305,12 @@ export default function App() {
         address: data.address || '',
         avatar_url: data.avatar_url || ''
       });
-      setIsAdmin(data.role === 'admin');
+
+      if (data.role === 'admin') {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
     }
   };
 
@@ -280,7 +326,7 @@ export default function App() {
         query = query.eq('upazilas.name_bn', selectedUpazila);
       }
 
-      const { data } = await query;
+      const { data, error } = await query;
 
       if (data && data.length > 0) {
         setServices(data.map(item => ({
@@ -321,10 +367,45 @@ export default function App() {
     }
   };
 
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    setAuthMessage('');
+
+    if (authMode === 'signup') {
+      if (authPassword !== authConfirmPassword) {
+        setAuthMessage('পাসওয়ার্ড দুটি মিলছে না!');
+        return;
+      }
+
+      const { error } = await supabase.auth.signUp({
+        email: authEmail,
+        password: authPassword,
+      });
+      if (error) {
+        setAuthMessage(error.message);
+      } else {
+        setAuthMessage('রেজিস্ট্রেশন সফল হয়েছে! ইমেল চেক করে কনফার্ম করুন।');
+        setAuthMode('login');
+      }
+    } else {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: authEmail,
+        password: authPassword,
+      });
+      if (error) {
+        setAuthMessage(error.message);
+      } else {
+        setShowAuthModal(false);
+        setAuthEmail('');
+        setAuthPassword('');
+        setAuthConfirmPassword('');
+      }
+    }
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setIsAdmin(false);
-    setUser(null);
   };
 
   const handleProfileUpdate = async (e) => {
@@ -625,7 +706,7 @@ export default function App() {
                 </div>
               ) : (
                 <button
-                  onClick={() => { setAuthMode('login'); setShowAuthModal(true); }}
+                  onClick={() => { setAuthMode('login'); setAuthMessage(''); setShowAuthModal(true); }}
                   className="h-10 px-3 rounded-2xl bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow-lg"
                 >
                   <LogIn className="w-4 h-4 text-emerald-300" /> লগইন
@@ -843,7 +924,7 @@ export default function App() {
               </div>
               <button
                 onClick={() => {
-                  if (!user) { setAuthMode('login'); setShowAuthModal(true); }
+                  if (!user) { setAuthMode('login'); setAuthMessage(''); setShowAuthModal(true); }
                   else setShowListingModal(true);
                 }}
                 className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-md transition active:scale-95 shrink-0"
@@ -946,7 +1027,7 @@ export default function App() {
                                 item.is_hidden ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-slate-100 text-slate-700 border-slate-200'
                               }`}
                             >
-                              {item.is_hidden ? <span className="text-red-600 font-bold text-[10px]">লুকানো</span> : <span className="text-slate-600 font-bold text-[10px]">দৃশ্যমান</span>}
+                              {item.is_hidden ? <EyeOff className="w-4 h-4 text-red-600" /> : <Eye className="w-4 h-4 text-slate-600" />}
                             </button>
                             <button
                               onClick={() => deleteListing(item.id)}
@@ -1359,27 +1440,137 @@ export default function App() {
         </footer>
       </main>
 
-      {/* Auth Modal */}
+      {/* Auth Modal (Login / Sign Up / Forgot Password) */}
       {showAuthModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-amber-400">
-            <button onClick={() => setShowAuthModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 z-10">
+            <button onClick={() => { setShowAuthModal(false); setAuthMessage(''); setIsResetRequestMode(false); }} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700">
               <X className="w-5 h-5" />
             </button>
 
-            {authMode === 'login' ? (
-              <Login onSwitchToSignup={() => setAuthMode('signup')} />
+            <div className="flex items-center gap-2 mb-2">
+              <KeyRound className="w-6 h-6 text-amber-600" />
+              <h3 className="font-extrabold text-slate-900 text-base">
+                {isResetRequestMode ? 'পাসওয়ার্ড রিকভারি' : authMode === 'login' ? 'অ্যাকাউন্টে লগইন করুন' : 'নতুন অ্যাকাউন্ট তৈরি করুন'}
+              </h3>
+            </div>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">
+              {isResetRequestMode ? 'আপনার রেজিস্টার্ড ইমেলটি দিন। আমরা একটি রিসেট লিংক পাঠাব।' : 'বিজ্ঞাপন দিতে ও নিজের পোস্ট নিয়ন্ত্রণ করতে লগইন থাকা আবশ্যক।'}
+            </p>
+
+            {authMessage && (
+              <div className="bg-amber-50 text-amber-900 border border-amber-200 p-2.5 rounded-xl text-xs font-bold mb-3 text-center">
+                {authMessage}
+              </div>
+            )}
+
+            {isResetRequestMode ? (
+              <form onSubmit={handleForgotPassword} className="space-y-3 text-xs">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">ইমেইল ঠিকানা *</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="name@example.com"
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95"
+                >
+                  রিসেট লিংক পাঠান
+                </button>
+                <div className="text-center mt-2">
+                  <button type="button" onClick={() => { setIsResetRequestMode(false); setAuthMessage(''); }} className="text-emerald-700 font-bold underline">
+                    লগইন পেজে ফিরে যান
+                  </button>
+                </div>
+              </form>
             ) : (
-              <Signup onSwitchToLogin={() => setAuthMode('login')} />
+              <form onSubmit={handleAuth} className="space-y-3 text-xs">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">ইমেইল ঠিকানা *</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="name@example.com"
+                    value={authEmail}
+                    onChange={(e) => setAuthEmail(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">পাসওয়ার্ড *</label>
+                  <div className="relative">
+                    <input
+                      required
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="কমপক্ষে ৬ অক্ষরের পাসওয়ার্ড"
+                      value={authPassword}
+                      onChange={(e) => setAuthPassword(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-amber-500 outline-none pr-12"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-2.5 text-[11px] font-bold text-emerald-700"
+                    >
+                      {showPassword ? 'লুকান' : 'দেখুন'}
+                    </button>
+                  </div>
+                </div>
+
+                {authMode === 'signup' && (
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">কনফার্ম পাসওয়ার্ড *</label>
+                    <input
+                      required
+                      type="password"
+                      placeholder="পুনরায় পাসওয়ার্ড দিন"
+                      value={authConfirmPassword}
+                      onChange={(e) => setAuthConfirmPassword(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    />
+                  </div>
+                )}
+
+                {authMode === 'login' && (
+                  <div className="text-right">
+                    <button type="button" onClick={() => { setIsResetRequestMode(true); setAuthMessage(''); }} className="text-xs text-emerald-700 font-bold hover:underline">
+                      পাসওয়ার্ড ভুলে গেছেন?
+                    </button>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-black py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2"
+                >
+                  {authMode === 'login' ? 'লগইন করুন' : 'রেজিস্ট্রেশন করুন'}
+                </button>
+              </form>
+            )}
+
+            {!isResetRequestMode && (
+              <div className="mt-4 text-center text-xs text-slate-600">
+                {authMode === 'login' ? (
+                  <span>অ্যাকাউন্ট নেই? <button onClick={() => { setAuthMode('signup'); setAuthMessage(''); }} className="text-amber-600 font-bold hover:underline">নতুন অ্যাকাউন্ট খুলুন</button></span>
+                ) : (
+                  <span>আগে থেকেই অ্যাকাউন্ট আছে? <button onClick={() => { setAuthMode('login'); setAuthMessage(''); }} className="text-amber-600 font-bold hover:underline">লগইন করুন</button></span>
+                )}
+              </div>
             )}
           </div>
         </div>
       )}
 
-      {/* Password Reset Modal */}
+      {/* Password Reset Modal when coming from email link */}
       {isPasswordResetMode && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl border-2 border-emerald-500 relative">
+          <div className="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl relative border-2 border-emerald-500">
             <h3 className="font-extrabold text-slate-900 text-base mb-2">নতুন পাসওয়ার্ড সেট করুন</h3>
             <p className="text-xs text-slate-500 mb-4">আপনার নতুন পাসওয়ার্ডটি এখানে দিন।</p>
             
@@ -1406,7 +1597,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Profile Edit Modal */}
+      {/* User Profile Edit Modal with Mandatory Fields */}
       {showProfileModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-sm w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
@@ -1418,36 +1609,42 @@ export default function App() {
               <UserCog className="w-6 h-6 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900 text-base">ইউজার প্রোফাইল আপডেট</h3>
             </div>
-            <p className="text-xs text-slate-500 mb-4 font-semibold">নাম, ঠিকানা ও ফোন নম্বর দেওয়া বাধ্যতামূলক।</p>
+            <p className="text-xs text-slate-500 mb-4 font-semibold">নাম, ঠিকানা ও ফোন নম্বর দেওয়া বাধ্যতামূলক (Mandatory)।</p>
 
             <form onSubmit={handleProfileUpdate} className="space-y-3 text-xs">
               <div>
                 <label className="font-bold text-slate-700 block mb-1">পূর্ণ নাম *</label>
                 <input
-                  required type="text" placeholder="যেমন: Md. Sarman Rana"
+                  required
+                  type="text"
+                  placeholder="যেমন: Md. Sarman Rana"
                   value={profileData.full_name}
                   onChange={(e) => setProfileData({...profileData, full_name: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">ভ্যালিড মোবাইল নম্বর *</label>
                 <input
-                  required type="tel" placeholder="017xxxxxxxx"
+                  required
+                  type="tel"
+                  placeholder="017xxxxxxxx"
                   value={profileData.phone}
                   onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
 
               <div>
                 <label className="font-bold text-slate-700 block mb-1">ঠিকানা *</label>
                 <input
-                  required type="text" placeholder="যেমন: হরিপুর সদর, ঠাকুরগাঁও"
+                  required
+                  type="text"
+                  placeholder="যেমন: হরিপুর সদর, ঠাকুরগাঁও"
                   value={profileData.address}
                   onChange={(e) => setProfileData({...profileData, address: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
 
@@ -1456,16 +1653,18 @@ export default function App() {
                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
                   <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
                   <input
-                    type="file" accept="image/*"
+                    type="file"
+                    accept="image/*"
                     onChange={(e) => setProfileAvatarFile(e.target.files[0])}
-                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 cursor-pointer"
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
                   />
                 </div>
               </div>
 
               <button
-                type="submit" disabled={uploading}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+                type="submit"
+                disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
               >
                 {uploading ? 'আপডেট হচ্ছে...' : <><Send className="w-4 h-4" /> প্রোফাইল সেভ করুন</>}
               </button>
@@ -1474,7 +1673,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Add Listing Modal */}
+      {/* Add Market / Rent Listing Modal */}
       {showListingModal && (
         <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl p-5 max-w-md w-full shadow-2xl relative border-2 border-emerald-500 max-h-[90vh] overflow-y-auto">
@@ -1496,10 +1695,12 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">বিজ্ঞাপনের শিরোনাম *</label>
                 <input
-                  required type="text" placeholder="যেমন: ৩ রুমের বাসা ভাড়া / বাইক বিক্রি"
+                  required
+                  type="text"
+                  placeholder="যেমন: ৩ রুমের বাসা ভাড়া / বাইক বিক্রি"
                   value={newListing.title}
                   onChange={(e) => setNewListing({...newListing, title: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
 
@@ -1509,7 +1710,7 @@ export default function App() {
                   <select
                     value={newListing.listing_type}
                     onChange={(e) => setNewListing({...newListing, listing_type: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   >
                     <option value="বিক্রয়">বিক্রয় (Sell)</option>
                     <option value="ভাড়া">ভাড়া (Rent)</option>
@@ -1518,10 +1719,12 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">মূল্য / ভাড়া *</label>
                   <input
-                    required type="text" placeholder="৫,০০০ ৳"
+                    required
+                    type="text"
+                    placeholder="৫,০০০ ৳"
                     value={newListing.price}
                     onChange={(e) => setNewListing({...newListing, price: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
               </div>
@@ -1529,10 +1732,12 @@ export default function App() {
               <div>
                 <label className="font-bold text-purple-800 block mb-1">বিকাশ/নগদ ট্রানজেকশন আইডি (TrxID) *</label>
                 <input
-                  required type="text" placeholder="যেমন: 9N7X4K8L"
+                  required
+                  type="text"
+                  placeholder="যেমন: 9N7X4K8L"
                   value={newListing.trx_id}
                   onChange={(e) => setNewListing({...newListing, trx_id: e.target.value})}
-                  className="w-full bg-purple-50 border border-purple-300 rounded-xl px-3 py-2 font-bold text-purple-950 outline-none"
+                  className="w-full bg-purple-50 border border-purple-300 rounded-xl px-3 py-2 font-bold text-purple-950 focus:ring-2 focus:ring-purple-500 outline-none"
                 />
               </div>
 
@@ -1541,9 +1746,10 @@ export default function App() {
                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
                   <ImageIcon className="w-4 h-4 text-slate-500 shrink-0" />
                   <input
-                    type="file" accept="image/*,video/*"
+                    type="file"
+                    accept="image/*,video/*"
                     onChange={(e) => setImageFile(e.target.files[0])}
-                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 cursor-pointer"
+                    className="w-full text-xs font-semibold text-slate-700 file:mr-2 file:py-1 file:px-2 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer"
                   />
                 </div>
               </div>
@@ -1551,10 +1757,12 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">মোবাইল নম্বর *</label>
                 <input
-                  required type="tel" placeholder="017xxxxxxxx"
+                  required
+                  type="tel"
+                  placeholder="017xxxxxxxx"
                   value={newListing.phone}
                   onChange={(e) => setNewListing({...newListing, phone: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
 
@@ -1564,7 +1772,7 @@ export default function App() {
                   <select
                     value={newListing.upazila}
                     onChange={(e) => setNewListing({...newListing, upazila: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   >
                     {upazilaList.map((u, i) => <option key={i} value={u}>{u}</option>)}
                   </select>
@@ -1572,10 +1780,12 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">নির্দিষ্ট এলাকা *</label>
                   <input
-                    required type="text" placeholder="চৌরঙ্গী বাজার"
+                    required
+                    type="text"
+                    placeholder="চৌরঙ্গী বাজার"
                     value={newListing.address}
                     onChange={(e) => setNewListing({...newListing, address: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
               </div>
@@ -1583,16 +1793,18 @@ export default function App() {
               <div>
                 <label className="font-bold text-slate-700 block mb-1">বিস্তারিত বিবরণ</label>
                 <textarea
-                  rows="2" placeholder="অন্যান্য শর্তাদি..."
+                  rows="2"
+                  placeholder="অন্যান্য শর্তাদি..."
                   value={newListing.description}
                   onChange={(e) => setNewListing({...newListing, description: e.target.value})}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                 ></textarea>
               </div>
 
               <button
-                type="submit" disabled={uploading}
-                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
+                type="submit"
+                disabled={uploading}
+                className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2 disabled:opacity-50"
               >
                 {uploading ? 'প্রসেসিং হচ্ছে...' : <><Send className="w-4 h-4" /> বিজ্ঞাপন জমা দিন (Submit)</>}
               </button>
@@ -1623,19 +1835,23 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">সেবার নাম *</label>
                   <input
-                    required type="text" placeholder="যেমন: আল-মদিনা ফার্মেসি"
+                    required
+                    type="text"
+                    placeholder="যেমন: আল-মদিনা ফার্মেসি"
                     value={newService.title}
                     onChange={(e) => setNewService({...newService, title: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">ফোন নম্বর *</label>
                   <input
-                    required type="tel" placeholder="017xxxxxxxx"
+                    required
+                    type="tel"
+                    placeholder="017xxxxxxxx"
                     value={newService.phone}
                     onChange={(e) => setNewService({...newService, phone: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
                 <div>
@@ -1643,7 +1859,7 @@ export default function App() {
                   <select
                     value={newService.upazila}
                     onChange={(e) => setNewService({...newService, upazila: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   >
                     {upazilaList.map((u, i) => <option key={i} value={u}>{u}</option>)}
                   </select>
@@ -1651,15 +1867,17 @@ export default function App() {
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">ঠিকানা *</label>
                   <input
-                    required type="text" placeholder="চৌরঙ্গী বাজার, হরিপুর"
+                    required
+                    type="text"
+                    placeholder="চৌরঙ্গী বাজার, হরিপুর"
                     value={newService.address}
                     onChange={(e) => setNewService({...newService, address: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 outline-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-1.5 mt-2"
+                  className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 mt-2"
                 >
                   <Send className="w-4 h-4" /> আবেদন জমা দিন
                 </button>
